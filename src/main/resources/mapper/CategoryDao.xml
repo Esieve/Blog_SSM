@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tech.acodesigner.dao.CategoryDao">
+
+    <select id="getCategories" resultType="CategoryDto">
+        SELECT blog_category.categoryId,categoryName,COUNT(articleId) AS categoryCount
+        FROM blog_article RIGHT JOIN blog_category
+        ON blog_article.categoryId=blog_category.categoryId
+        WHERE blog_category.categoryId>1 GROUP BY categoryName
+    </select>
+    
+    <select id="getCategory" resultType="Category" parameterType="int">
+        SELECT * FROM blog_category WHERE categoryId=#{categoryId}
+    </select>
+
+    <insert id="saveCategory" parameterType="string">
+        INSERT IGNORE INTO blog_category VALUES (null,#{_parameter})
+    </insert>
+
+    <update id="updateCategory" parameterType="Category">
+        UPDATE blog_category SET categoryName=#{categoryName}
+        WHERE categoryId=#{categoryId}
+    </update>
+
+    <delete id="deleteCategory" parameterType="int">
+        DELETE FROM blog_category WHERE categoryId=#{categoryId}
+    </delete>
+
+</mapper>

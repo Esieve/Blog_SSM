@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="blog@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.1">
+    <root id="1"/>
+    <schema id="2" parent="1" name="blog">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="db_cblog"/>
+    <schema id="4" parent="1" name="information_schema"/>
+    <schema id="5" parent="1" name="mysql"/>
+    <schema id="6" parent="1" name="performance_schema"/>
+    <schema id="7" parent="1" name="sakila"/>
+    <schema id="8" parent="1" name="seckill"/>
+    <schema id="9" parent="1" name="sys"/>
+    <schema id="10" parent="1" name="test"/>
+    <schema id="11" parent="1" name="testdemo1"/>
+    <schema id="12" parent="1" name="world"/>
+    <table id="13" parent="2" name="blog_article"/>
+    <table id="14" parent="2" name="blog_category"/>
+    <table id="15" parent="2" name="blog_link"/>
+    <table id="16" parent="2" name="blog_message"/>
+    <table id="17" parent="2" name="blog_user"/>
+    <column id="18" parent="13" name="articleId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="19" parent="13" name="categoryId">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="20" parent="13" name="userId">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="21" parent="13" name="title">
+      <Position>4</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="22" parent="13" name="content">
+      <Position>5</Position>
+      <DataType>mediumtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="23" parent="13" name="pubDate">
+      <Position>6</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="13" name="clicks">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="25" parent="13" name="image">
+      <Position>8</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="26" parent="13" name="categoryId">
+      <ColNames>categoryId</ColNames>
+    </index>
+    <index id="27" parent="13" name="userId">
+      <ColNames>userId</ColNames>
+    </index>
+    <key id="28" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>articleId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="29" parent="13" name="blog_article_ibfk_1">
+      <ColNames>categoryId</ColNames>
+      <RefSchemaName>blog</RefSchemaName>
+      <RefTableName>blog_category</RefTableName>
+      <RefColNames>categoryId</RefColNames>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <foreign-key id="30" parent="13" name="blog_article_ibfk_2">
+      <ColNames>userId</ColNames>
+      <RefSchemaName>blog</RefSchemaName>
+      <RefTableName>blog_user</RefTableName>
+      <RefColNames>userId</RefColNames>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <column id="31" parent="14" name="categoryId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="32" parent="14" name="categoryName">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="33" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>categoryId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="34" parent="15" name="linkId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="35" parent="15" name="linkName">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="15" name="url">
+      <Position>3</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="37" parent="15" name="linkName">
+      <ColNames>linkName</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="38" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>linkId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="39" parent="15" name="linkName">
+      <ColNames>linkName</ColNames>
+      <UnderlyingIndexName>linkName</UnderlyingIndexName>
+    </key>
+    <column id="40" parent="16" name="messageId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="41" parent="16" name="userId">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="42" parent="16" name="messageType">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="43" parent="16" name="pid">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="44" parent="16" name="content">
+      <Position>5</Position>
+      <DataType>varchar(500)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="16" name="pubDate">
+      <Position>6</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="46" parent="16" name="userId">
+      <ColNames>userId</ColNames>
+    </index>
+    <key id="47" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>messageId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="48" parent="16" name="blog_message_ibfk_1">
+      <ColNames>userId</ColNames>
+      <RefSchemaName>blog</RefSchemaName>
+      <RefTableName>blog_user</RefTableName>
+      <RefColNames>userId</RefColNames>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <column id="49" parent="17" name="userId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="50" parent="17" name="userType">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="51" parent="17" name="username">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="17" name="password">
+      <Position>4</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="17" name="image">
+      <Position>5</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <index id="54" parent="17" name="username">
+      <ColNames>username</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="55" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>userId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="56" parent="17" name="username">
+      <ColNames>username</ColNames>
+      <UnderlyingIndexName>username</UnderlyingIndexName>
+    </key>
+  </database-model>
+</dataSource>

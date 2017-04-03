@@ -1,0 +1,55 @@
+CREATE DATABASE blog ;
+
+USE blog;
+
+CREATE TABLE blog_user (
+    userId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    userType INT DEFAULT 0,
+    username VARCHAR(20) NOT NULL UNIQUE,
+    password VARCHAR(50) NOT NULL,
+    image VARCHAR(50) DEFAULT NULL
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE blog_category (
+    categoryId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    categoryName VARCHAR(20) NOT NULL UNIQUE
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE blog_message (
+    messageId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    userId INT,
+    messageType INT NOT NULL,
+    pid INT DEFAULT NULL,
+    content VARCHAR(500) NOT NULL,
+    pubDate DATETIME NOT NULL,
+    FOREIGN KEY (userId)
+        REFERENCES blog_user (userId)
+        ON DELETE SET NULL
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE blog_article (
+    articleId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    categoryId INT,
+    userId INT,
+    title VARCHAR(50) NOT NULL,
+    content MEDIUMTEXT,
+    pubDate DATETIME NOT NULL,
+    clicks INT DEFAULT 0,
+    image VARCHAR(50) NOT NULL,
+    FOREIGN KEY (categoryId)
+        REFERENCES blog_category (categoryId)
+        ON DELETE SET NULL,
+    FOREIGN KEY (userId)
+        REFERENCES blog_user (userId)
+        ON DELETE SET NULL
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE blog_link (
+    linkId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    linkName VARCHAR(20) NOT NULL UNIQUE,
+    url VARCHAR(50) NOT NULL
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8;
+
+INSERT INTO blog_category VALUES(NULL,"about");
+INSERT INTO blog_user VALUES(NULL,1,'admin','ICy5YqxZB1uWSwcVLSNLcA==','ted.jpg');
+INSERT INTO blog_article VALUES(NULL,1,1,"about",1,NOW(),0,"root");

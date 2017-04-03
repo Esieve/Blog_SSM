@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tech.acodesigner.dao.UserDao">
+
+    <select id="getUser" resultType="User" parameterType="User">
+        SELECT * FROM blog_user
+        WHERE username=#{username} AND password=#{password};
+    </select>
+
+    <insert id="saveUser" parameterType="User">
+        INSERT IGNORE INTO blog_user
+        VALUES (NULL ,0,#{username},#{password},#{photo});
+    </insert>
+
+</mapper>

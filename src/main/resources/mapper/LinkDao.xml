@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tech.acodesigner.dao.LinkDao">
+
+    <select id="getLinkById" resultType="Link" parameterType="int">
+        SELECT * FROM blog_link WHERE linkId=#{linkId};
+    </select>
+
+    <select id="getLinks" resultType="Link">
+        SELECT * FROM blog_link;
+    </select>
+
+    <insert id="saveLink" parameterType="Link">
+        INSERT IGNORE INTO blog_link VALUES (#{linkId},#{linkName},#{url});
+    </insert>
+
+    <update id="updateLink" parameterType="Link">
+        UPDATE blog_link SET linkName=#{linkName},url=#{url} WHERE linkId=#{linkId};
+    </update>
+
+    <delete id="deleteLink" parameterType="int">
+        DELETE FROM blog_link where linkId=#{linkId};
+    </delete>
+
+</mapper>

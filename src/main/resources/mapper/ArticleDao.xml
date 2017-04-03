@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tech.acodesigner.dao.ArticleDao">
+
+    <select id="getAbout" resultType="AboutDto">
+        SELECT content FROM blog_article WHERE categoryId = 1
+    </select>
+
+    <update id="updateAbout" parameterType="string">
+        UPDATE blog_article SET content=#{content} WHERE categoryId=1
+    </update>
+
+    <select id="searchArticles" resultType="ArticleDto" parameterType="string">
+        SELECT * FROM blog_article t1,blog_category t2,blog_user t3
+        WHERE t1.categoryId=t2.categoryId
+        AND t1.userId = t3.userId
+        AND title LIKE CONCAT('%',#{_parameter},'%')
+        AND t1.categoryId>1
+        ORDER BY pubDate DESC
+    </select>
+
+    <select id="pagination" resultType="ArticleDto" parameterType="PageUtil">
+        SELECT * FROM blog_article t1,blog_category t2,blog_user t3
+        WHERE t1.categoryId=t2.categoryId AND t1.userId = t3.userId AND t1.categoryId>1
+        ORDER BY pubDate DESC
+        LIMIT #{start}, #{pageSize}
+    </select>
+
+    <select id="getPreArticle" resultType="ArticleLiteDto" parameterType="int">
+        SELECT * FROM blog_article WHERE articleId =
+        (SELECT articleId FROM blog_article
+        WHERE articleId <![CDATA[ < ]]> #{articleId} and categoryId > 1
+        ORDER BY articleId DESC LIMIT 1)
+    </select>
+
+    <select id="getNextArticle" resultType="ArticleLiteDto" parameterType="int">
+        SELECT * FROM blog_article WHERE articleId =
+        (SELECT articleId FROM blog_article
+        WHERE articleId > #{articleId} and categoryId > 1
+        ORDER BY articleId ASC LIMIT 1)
+    </select>
+
+    <select id="getArticleById" resultType="ArticleDto" parameterType="int">
+        SELECT * FROM blog_article t1,blog_category t2,blog_user t3
+        WHERE t1.categoryId=t2.categoryId AND t1.userId=t3.userId AND t1.articleId=#{articleId}
+    </select>
+
+    <select id="getArticles" resultType="ArticleDto">
+        SELECT articleId,title,content,pubDate FROM blog_article
+        WHERE categoryId>1 ORDER BY pubDate DESC
+    </select>
+
+    <select id="getArticlesByCategoryId" resultType="ArticleLiteDto" parameterType="int">
+        SELECT articleId,title,pubDate FROM blog_article
+        WHERE categoryId=#{categoryId} ORDER BY pubDate DESC
+    </select>
+
+    <update id="updateArticle" parameterType="Article">
+        UPDATE blog_article
+        SET categoryId=#{categoryId},title=#{title},content=#{content},image=#{image}
+        WHERE articleId=#{articleId}
+    </update>
+
+    <insert id="saveArticle" parameterType="Article">
+        INSERT INTO blog_article
+        VALUES (null,#{categoryId},1,#{title},#{content},#{pubDate},0,#{image})
+    </insert>
+
+    <delete id="deleteArticle" parameterType="int">
+        DELETE FROM blog_article WHERE articleId = #{articleId}
+    </delete>
+
+    <update id="addClicks" parameterType="int">
+        UPDATE blog_article SET clicks=clicks+1 WHERE articleId=#{articleId}
+    </update>
+
+</mapper>
