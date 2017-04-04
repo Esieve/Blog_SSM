@@ -8,8 +8,8 @@ import tech.acodesigner.entity.User;
  */
 public interface UserService {
 
-    public OperationResult<User> getUser(User user);
+    public OperationResult<User> checkUser(User user);
 
-    public OperationResult saveUser(User user);
+    public OperationResult registerUser(User user);
 
 }

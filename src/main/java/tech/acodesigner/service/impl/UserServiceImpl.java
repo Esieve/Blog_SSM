@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserDao userDao;
 
-    public OperationResult<User> getUser(User user) {
+    public OperationResult<User> checkUser(User user) {
         OperationResult<User> or = new OperationResult<User>();
         User result = userDao.getUser(user);
         if (result == null) {
@@ -29,15 +29,15 @@ public class UserServiceImpl implements UserService{
         return or;
     }
 
-    public OperationResult saveUser(User user) {
+    public OperationResult registerUser(User user) {
         OperationResult or = new OperationResult();
         int result = userDao.saveUser(user);
         if (result <= 0) {
             or.setSuccess(false);
-            or.setInfo("保存失败");
+            or.setInfo("用户名已存在");
         } else {
             or.setSuccess(true);
-            or.setInfo("保存成功");
+            or.setInfo("注册成功");
         }
         return or;
     }

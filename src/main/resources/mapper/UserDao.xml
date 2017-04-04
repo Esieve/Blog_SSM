@@ -12,7 +12,7 @@
 
     <insert id="saveUser" parameterType="User">
         INSERT IGNORE INTO blog_user
-        VALUES (NULL ,0,#{username},#{password},#{photo});
+        VALUES (NULL ,0,#{username},#{password},#{image});
     </insert>
 
 </mapper>

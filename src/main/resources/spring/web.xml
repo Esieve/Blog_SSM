@@ -9,10 +9,13 @@
  http://www.springframework.org/schema/context
  http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--开启注解模式-->
     <mvc:annotation-driven/>
 
+    <!--静态资源默认servlet配置-->
     <mvc:default-servlet-handler/>
 
+    <!--jsp显示-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/jsp/"/>
@@ -20,5 +23,13 @@
     </bean>
 
     <context:component-scan base-package="tech.acodesigner.web"/>
+
+    <!--注册拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/manage"/>
+            <bean class="tech.acodesigner.interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

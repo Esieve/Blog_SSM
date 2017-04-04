@@ -21,9 +21,7 @@ public class UserDaoTest {
 
     @Test
     public void getUser() throws Exception {
-        User user = new User();
-        user.setUsername("root");
-        user.setPassword("ICy5YqxZB1uWSwcVLSNLcA==");
+        User user = new User("root", "ICy5YqxZB1uWSwcVLSNLcA==");
         User result = userDao.getUser(user);
         if (result == null) {
             System.out.println("NULL");
@@ -34,10 +32,7 @@ public class UserDaoTest {
 
     @Test
     public void saveUser() throws Exception {
-        User user = new User();
-        user.setUsername("123");
-        user.setPassword("123");
-        user.setImage("123");
+        User user = new User("123", "123", "123");
         int result = userDao.saveUser(user);
         System.out.println(result);
     }

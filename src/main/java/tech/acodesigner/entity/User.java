@@ -10,6 +10,17 @@ public class User {
     private String password;
     private String image;
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String username, String password, String image) {
+        this.username = username;
+        this.password = password;
+        this.image = image;
+    }
+
     public int getUserId() {
         return userId;
     }
