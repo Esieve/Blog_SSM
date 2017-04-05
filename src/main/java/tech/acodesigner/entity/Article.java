@@ -1,5 +1,7 @@
 package tech.acodesigner.entity;
 
+import java.util.Date;
+
 /**
  * Created by 77239 on 2017/4/1/0001.
  */
@@ -10,9 +12,19 @@ public class Article {
     private int userId;
     private String title;
     private String content;
-    private String pubDate;
+    private Date pubDate;
     private int clicks;
     private String image;
+
+    public Article() {
+    }
+
+    public Article(int categoryId, String title, String content, String image) {
+        this.categoryId = categoryId;
+        this.title = title;
+        this.content = content;
+        this.image = image;
+    }
 
     public int getArticleId() {
         return articleId;
@@ -54,11 +66,11 @@ public class Article {
         this.content = content;
     }
 
-    public String getPubDate() {
+    public Date getPubDate() {
         return pubDate;
     }
 
-    public void setPubDate(String pubDate) {
+    public void setPubDate(Date pubDate) {
         this.pubDate = pubDate;
     }
 

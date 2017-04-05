@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import tech.acodesigner.dto.UserDto;
 import tech.acodesigner.entity.User;
 
 import static org.junit.Assert.*;
@@ -22,7 +23,7 @@ public class UserDaoTest {
     @Test
     public void getUser() throws Exception {
         User user = new User("root", "ICy5YqxZB1uWSwcVLSNLcA==");
-        User result = userDao.getUser(user);
+        UserDto result = userDao.getUser(user);
         if (result == null) {
             System.out.println("NULL");
         } else {

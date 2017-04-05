@@ -1,5 +1,6 @@
 package tech.acodesigner.dao;
 
+import tech.acodesigner.dto.UserDto;
 import tech.acodesigner.entity.User;
 
 /**
@@ -7,7 +8,7 @@ import tech.acodesigner.entity.User;
  */
 public interface UserDao {
 
-    public User getUser(User user);
+    public UserDto getUser(User user);
 
     public int saveUser(User user);
 

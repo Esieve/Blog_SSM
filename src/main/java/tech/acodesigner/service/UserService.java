@@ -1,6 +1,7 @@
 package tech.acodesigner.service;
 
 import tech.acodesigner.dto.OperationResult;
+import tech.acodesigner.dto.UserDto;
 import tech.acodesigner.entity.User;
 
 /**
@@ -8,7 +9,7 @@ import tech.acodesigner.entity.User;
  */
 public interface UserService {
 
-    public OperationResult<User> checkUser(User user);
+    public OperationResult<UserDto> checkUser(User user);
 
     public OperationResult registerUser(User user);
 

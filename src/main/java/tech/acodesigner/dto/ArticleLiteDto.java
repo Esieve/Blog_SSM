@@ -1,5 +1,7 @@
 package tech.acodesigner.dto;
 
+import java.util.Date;
+
 /**
  * Created by 77239 on 2017/4/1/0001.
  */
@@ -7,7 +9,7 @@ public class ArticleLiteDto {
 
     private int articleId;
     private String title;
-    private String pubDate;
+    private Date pubDate;
 
     public int getArticleId() {
         return articleId;
@@ -25,11 +27,11 @@ public class ArticleLiteDto {
         this.title = title;
     }
 
-    public String getPubDate() {
+    public Date getPubDate() {
         return pubDate;
     }
 
-    public void setPubDate(String pubDate) {
+    public void setPubDate(Date pubDate) {
         this.pubDate = pubDate;
     }
 }

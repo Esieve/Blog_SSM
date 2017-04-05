@@ -9,9 +9,9 @@ import tech.acodesigner.dto.AboutDto;
 import tech.acodesigner.dto.ArticleDto;
 import tech.acodesigner.dto.ArticleLiteDto;
 import tech.acodesigner.entity.Article;
-import tech.acodesigner.util.DateUtil;
 import tech.acodesigner.util.PageUtil;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -69,8 +69,8 @@ public class ArticleDaoTest {
 
     @Test
     public void getArticleById() throws Exception {
-        ArticleDto article = articleDao.getArticleById(11);
-        System.out.println(article.getContent());
+        ArticleDto article = articleDao.getArticleById(14);
+        System.out.println(article.getContent() + "," + article.getPubDate());
     }
 
     @Test
@@ -107,7 +107,7 @@ public class ArticleDaoTest {
         article.setCategoryId(13);
         article.setTitle("test");
         article.setContent("test");
-        article.setPubDate(DateUtil.formatLong(System.currentTimeMillis(),"yyyy-MM-dd HH:mm:ss"));
+        article.setPubDate(new Date(System.currentTimeMillis()));
         article.setImage("test");
         int result = articleDao.saveArticle(article);
         System.out.println(result);
@@ -115,7 +115,7 @@ public class ArticleDaoTest {
 
     @Test
     public void deleteArticle() throws Exception {
-        int result = articleDao.deleteArticle(13);
+        int result = articleDao.deleteArticle(14);
         System.out.println(result);
     }
 

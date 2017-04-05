@@ -2,6 +2,8 @@ package tech.acodesigner.dto;
 
 import tech.acodesigner.entity.Category;
 
+import java.util.Date;
+
 /**
  * Created by 77239 on 2017/4/1/0001.
  */
@@ -10,7 +12,7 @@ public class ArticleDto {
     private int articleId;
     private String title;
     private String content;
-    private String pubDate;
+    private Date pubDate;
     private int clicks;
     private String image;
     private Category category;
@@ -40,11 +42,11 @@ public class ArticleDto {
         this.content = content;
     }
 
-    public String getPubDate() {
+    public Date getPubDate() {
         return pubDate;
     }
 
-    public void setPubDate(String pubDate) {
+    public void setPubDate(Date pubDate) {
         this.pubDate = pubDate;
     }
 
