@@ -6,16 +6,16 @@
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
-    <schema id="3" parent="1" name="db_cblog"/>
-    <schema id="4" parent="1" name="information_schema"/>
-    <schema id="5" parent="1" name="mysql"/>
-    <schema id="6" parent="1" name="performance_schema"/>
-    <schema id="7" parent="1" name="sakila"/>
-    <schema id="8" parent="1" name="seckill"/>
-    <schema id="9" parent="1" name="sys"/>
-    <schema id="10" parent="1" name="test"/>
-    <schema id="11" parent="1" name="testdemo1"/>
-    <schema id="12" parent="1" name="world"/>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="sakila"/>
+    <schema id="7" parent="1" name="seckill"/>
+    <schema id="8" parent="1" name="sys"/>
+    <schema id="9" parent="1" name="world"/>
+    <schema id="10" parent="1" name="jdbc"/>
+    <schema id="11" parent="1" name="t1"/>
+    <schema id="12" parent="1" name="uploadfile"/>
     <table id="13" parent="2" name="blog_article"/>
     <table id="14" parent="2" name="blog_category"/>
     <table id="15" parent="2" name="blog_link"/>
@@ -43,7 +43,6 @@
     <column id="22" parent="13" name="content">
       <Position>5</Position>
       <DataType>mediumtext|0</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="23" parent="13" name="pubDate">
       <Position>6</Position>
@@ -96,119 +95,127 @@
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="33" parent="14" name="PRIMARY">
+    <index id="33" parent="14" name="categoryName">
+      <ColNames>categoryName</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="34" parent="14" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>categoryId</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="34" parent="15" name="linkId">
+    <key id="35" parent="14" name="categoryName">
+      <ColNames>categoryName</ColNames>
+      <UnderlyingIndexName>categoryName</UnderlyingIndexName>
+    </key>
+    <column id="36" parent="15" name="linkId">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="35" parent="15" name="linkName">
+    <column id="37" parent="15" name="linkName">
       <Position>2</Position>
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="36" parent="15" name="url">
+    <column id="38" parent="15" name="url">
       <Position>3</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="37" parent="15" name="linkName">
+    <index id="39" parent="15" name="linkName">
       <ColNames>linkName</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="38" parent="15" name="PRIMARY">
+    <key id="40" parent="15" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>linkId</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="39" parent="15" name="linkName">
+    <key id="41" parent="15" name="linkName">
       <ColNames>linkName</ColNames>
       <UnderlyingIndexName>linkName</UnderlyingIndexName>
     </key>
-    <column id="40" parent="16" name="messageId">
+    <column id="42" parent="16" name="messageId">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="41" parent="16" name="userId">
+    <column id="43" parent="16" name="userId">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="42" parent="16" name="messageType">
+    <column id="44" parent="16" name="messageType">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="43" parent="16" name="pid">
+    <column id="45" parent="16" name="pid">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="44" parent="16" name="content">
+    <column id="46" parent="16" name="content">
       <Position>5</Position>
       <DataType>varchar(500)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="45" parent="16" name="pubDate">
+    <column id="47" parent="16" name="pubDate">
       <Position>6</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="46" parent="16" name="userId">
+    <index id="48" parent="16" name="userId">
       <ColNames>userId</ColNames>
     </index>
-    <key id="47" parent="16" name="PRIMARY">
+    <key id="49" parent="16" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>messageId</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="48" parent="16" name="blog_message_ibfk_1">
+    <foreign-key id="50" parent="16" name="blog_message_ibfk_1">
       <ColNames>userId</ColNames>
       <RefSchemaName>blog</RefSchemaName>
       <RefTableName>blog_user</RefTableName>
       <RefColNames>userId</RefColNames>
       <OnDelete>set-null</OnDelete>
     </foreign-key>
-    <column id="49" parent="17" name="userId">
+    <column id="51" parent="17" name="userId">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="50" parent="17" name="userType">
+    <column id="52" parent="17" name="userType">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="51" parent="17" name="username">
+    <column id="53" parent="17" name="username">
       <Position>3</Position>
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="52" parent="17" name="password">
+    <column id="54" parent="17" name="password">
       <Position>4</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="53" parent="17" name="image">
+    <column id="55" parent="17" name="image">
       <Position>5</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <index id="54" parent="17" name="username">
+    <index id="56" parent="17" name="username">
       <ColNames>username</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="55" parent="17" name="PRIMARY">
+    <key id="57" parent="17" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>userId</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="56" parent="17" name="username">
+    <key id="58" parent="17" name="username">
       <ColNames>username</ColNames>
       <UnderlyingIndexName>username</UnderlyingIndexName>
     </key>

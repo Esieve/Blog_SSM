@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../common/tag.jsp" %>
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('select').material_select();
@@ -14,7 +15,7 @@
     function notEmpty() {
         var title = document.getElementById("title").value;
         var content = CKEDITOR.instances.content.getData();
-        var category = document.getElementById("category").value;
+        var category = document.getElementById("categoryId").value;
         if (title == null || title == "") {
             Materialize.toast("标题不能为空", 2000, "rounded");
             return false;
@@ -43,7 +44,9 @@
                     <select id="categoryId" name="categoryId">
                         <option value="" disabled selected>类别</option>
                         <c:forEach var="category" items="${categories}">
-                            <option value="${category.id }" ${category.id==article.category.categoryId?'selected':''}>${category.name}</option>
+                            <option value="${category.categoryId}" ${category.categoryId==article.category.categoryId?'selected':''}>
+                                    ${category.categoryName}
+                            </option>
                         </c:forEach>
                     </select>
                 </div>
@@ -59,7 +62,7 @@
                 </div>
                 <br><br><br><br>
                 <div>
-                    <textarea class="ckeditor" id="content" name="content">${article.content }</textarea>
+                    <textarea class="ckeditor" id="content" name="content">${article.content}</textarea>
                 </div>
                 <br>
                 <button class="btn waves-effect waves-light green" type="submit" name="action">保存</button>

@@ -7,17 +7,15 @@
 
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="${dbDriver}"/>
-        <property name="jdbcUrl" value="${dbUrl}"/>
-        <property name="user" value="${dbUsername}"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!--<property name="driver" value="${dbDriver}"/>-->
+        <property name="url" value="${dbUrl}"/>
+        <property name="username" value="${dbUsername}"/>
         <property name="password" value="${dbPassword}"/>
 
-        <property name="maxPoolSize" value="120"/>
-        <property name="minPoolSize" value="10"/>
-        <property name="autoCommitOnClose" value="false"/>
-        <property name="checkoutTimeout" value="1000"/>
-        <property name="acquireRetryAttempts" value="2"/>
+        <property name="maxActive" value="30"/>
+        <property name="minIdle" value="10"/>
+        <property name="maxWait" value="1000"/>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
