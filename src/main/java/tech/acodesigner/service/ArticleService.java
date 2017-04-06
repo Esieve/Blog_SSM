@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface ArticleService {
 
-    public OperationResult<List<ArticleDto>> searchArticles(String key);
+    public List<ArticleDto> searchArticles(String key);
 
     public List<ArticleDto> pagination(PageUtil pageUtil);
 
@@ -34,5 +34,7 @@ public interface ArticleService {
     public OperationResult deleteArticle(int articleId);
 
     public OperationResult addClicks(int articleId);
+
+    public int countArticleNum();
 
 }

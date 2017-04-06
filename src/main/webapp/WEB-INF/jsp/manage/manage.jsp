@@ -9,6 +9,17 @@
 <html>
 <head>
     <%@ include file="../common/head.jsp" %>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (${not empty info})
+                showErrorInfo();
+        });
+        function showErrorInfo() {
+            $("div.info").fadeIn(1000, function () {
+                $("div.info").delay(1000).fadeOut(500);
+            });
+        }
+    </script>
 </head>
 <body class="grey lighten-4">
 <!--导航条-->
@@ -46,6 +57,7 @@
 <div class="row">
     <div class="col s2"></div>
     <div class="col s8">
+        <%@ include file="../common/info.jsp" %>
         <jsp:include page="${mainPage}"></jsp:include>
     </div>
     <div class="col s2"></div>

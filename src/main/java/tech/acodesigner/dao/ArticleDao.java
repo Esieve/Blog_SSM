@@ -40,5 +40,6 @@ public interface ArticleDao {
 
     public int addClicks(int articleId);
 
+    public int countArticleNum();
 
 }

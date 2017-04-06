@@ -124,4 +124,10 @@ public class ArticleDaoTest {
         System.out.println(result);
     }
 
+    @Test
+    public void countArticleNum() throws Exception {
+        int result = articleDao.countArticleNum();
+        System.out.println(result);
+    }
+
 }

@@ -8,6 +8,20 @@ public class Link {
     private String linkName;
     private String url;
 
+    public Link() {
+    }
+
+    public Link(String linkName, String url) {
+        this.linkName = linkName;
+        this.url = url;
+    }
+
+    public Link(int linkId, String linkName, String url) {
+        this.linkId = linkId;
+        this.linkName = linkName;
+        this.url = url;
+    }
+
     public int getLinkId() {
         return linkId;
     }

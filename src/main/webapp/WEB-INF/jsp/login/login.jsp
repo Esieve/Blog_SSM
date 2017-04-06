@@ -12,9 +12,8 @@
     <%@ include file="../common/head.jsp" %>
     <script type="text/javascript">
         $(document).ready(function () {
-            <c:if test="${not empty info }">
-            showErrorInfo();
-            </c:if>
+            if (${not empty info})
+                showErrorInfo();
         });
         function showErrorInfo() {
             $("div.info").fadeIn(1000, function () {
@@ -55,9 +54,7 @@
     <div class="col s4"></div>
     <div class="col s4">
         <jsp:include page="${mainPage}"></jsp:include>
-        <div class="info center" style="display: none;">
-            <a id="info" class="waves-effect waves-light btn red">${info}</a>
-        </div>
+        <%@ include file="../common/info.jsp" %>
     </div>
     <div class="col s4"></div>
 </div>

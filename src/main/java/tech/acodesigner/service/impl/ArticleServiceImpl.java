@@ -21,17 +21,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleDao articleDao;
 
-    public OperationResult<List<ArticleDto>> searchArticles(String key) {
-        List<ArticleDto> articles = articleDao.getArticlesByKey(key);
-        OperationResult<List<ArticleDto>> op = new OperationResult<List<ArticleDto>>();
-        if (articles.size() == 0) {
-            op.setSuccess(false);
-            op.setInfo("无结果");
-        } else {
-            op.setSuccess(true);
-            op.setData(articles);
-        }
-        return op;
+    public List<ArticleDto> searchArticles(String key) {
+        return articleDao.getArticlesByKey(key);
     }
 
     public List<ArticleDto> pagination(PageUtil pageUtil) {
@@ -90,10 +81,10 @@ public class ArticleServiceImpl implements ArticleService {
         int result = articleDao.updateArticle(article);
         if (result <= 0) {
             or.setSuccess(false);
-            or.setInfo("更新失败");
+            or.setInfo("修改失败");
         } else {
             or.setSuccess(true);
-            or.setInfo("更新成功");
+            or.setInfo("修改成功");
         }
         return or;
     }
@@ -136,4 +127,9 @@ public class ArticleServiceImpl implements ArticleService {
         }
         return or;
     }
+
+    public int countArticleNum() {
+        return articleDao.countArticleNum();
+    }
+
 }

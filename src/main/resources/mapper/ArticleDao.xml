@@ -99,4 +99,10 @@
         UPDATE blog_article SET clicks=clicks+1 WHERE articleId=#{articleId}
     </update>
 
+    <select id="countArticleNum" resultType="int">
+        SELECT COUNT(*) AS total
+        FROM blog_article
+        WHERE categoryId > 1
+    </select>
+
 </mapper>

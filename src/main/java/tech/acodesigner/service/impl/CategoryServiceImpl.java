@@ -41,10 +41,10 @@ public class CategoryServiceImpl implements CategoryService {
         int result = categoryDao.saveCategory(categoryName);
         if (result <= 0) {
             or.setSuccess(false);
-            or.setInfo("保存失败");
+            or.setInfo("添加失败");
         } else {
             or.setSuccess(true);
-            or.setInfo("保存成功");
+            or.setInfo("添加成功");
         }
         return or;
     }
@@ -54,10 +54,10 @@ public class CategoryServiceImpl implements CategoryService {
         int result = categoryDao.updateCategory(category);
         if (result <= 0) {
             or.setSuccess(false);
-            or.setInfo("更新失败");
+            or.setInfo("修改失败");
         } else {
             or.setSuccess(true);
-            or.setInfo("更新成功");
+            or.setInfo("修改成功");
         }
         return or;
     }

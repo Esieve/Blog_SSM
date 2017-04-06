@@ -17,15 +17,18 @@
         var content = CKEDITOR.instances.content.getData();
         var category = document.getElementById("categoryId").value;
         if (title == null || title == "") {
-            Materialize.toast("标题不能为空", 2000, "rounded");
+            $("#info").text("标题不能为空！");
+            showErrorInfo();
             return false;
         }
         if (content == null || content == "") {
-            Materialize.toast("内容不能为空", 2000, "rounded");
+            $("#info").text("内容不能为空！");
+            showErrorInfo();
             return false;
         }
         if (category == null || category == "") {
-            Materialize.toast("类别不能为空", 2000, "rounded");
+            $("#info").text("类别不能为空！");
+            showErrorInfo();
             return false;
         }
         return true;
