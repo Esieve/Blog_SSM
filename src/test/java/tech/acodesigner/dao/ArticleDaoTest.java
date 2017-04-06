@@ -39,23 +39,6 @@ public class ArticleDaoTest {
     }
 
     @Test
-    public void searchArticles() throws Exception {
-        List<ArticleDto> articles = articleDao.searchArticles("2");
-        for (ArticleDto article : articles) {
-            System.out.println(article.getContent());
-        }
-    }
-
-    @Test
-    public void pagination() throws Exception {
-        PageUtil pageUtil = new PageUtil(1, 5);
-        List<ArticleDto> articles = articleDao.pagination(pageUtil);
-        for (ArticleDto article : articles) {
-            System.out.println(article.getContent());
-        }
-    }
-
-    @Test
     public void getPreArticle() throws Exception {
         ArticleLiteDto article = articleDao.getPreArticle(11);
         System.out.println(article.getTitle());
@@ -69,15 +52,31 @@ public class ArticleDaoTest {
 
     @Test
     public void getArticleById() throws Exception {
-        ArticleDto article = articleDao.getArticleById(14);
-        System.out.println(article.getContent() + "," + article.getPubDate());
+        ArticleDto article = articleDao.getArticleById(4);
+        System.out.println(article);
     }
 
     @Test
     public void getArticles() throws Exception {
         List<ArticleDto> articles = articleDao.getArticles();
         for (ArticleDto article:articles) {
-            System.out.println(article.getContent());
+            System.out.println(article);
+        }
+    }
+
+    @Test
+    public void getArticlesByKey() throws Exception {
+        List<ArticleDto> articles = articleDao.getArticlesByKey("2");
+        for (ArticleDto article : articles) {
+            System.out.println(article);
+        }
+    }
+
+    @Test
+    public void getArticlesByRange() throws Exception {
+        List<ArticleDto> articles = articleDao.getArticlesByRange(new PageUtil(1, 5));
+        for (ArticleDto article : articles) {
+            System.out.println(article);
         }
     }
 

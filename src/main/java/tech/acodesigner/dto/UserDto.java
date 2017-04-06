@@ -41,4 +41,14 @@ public class UserDto {
     public void setImage(String image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", userType=" + userType +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }

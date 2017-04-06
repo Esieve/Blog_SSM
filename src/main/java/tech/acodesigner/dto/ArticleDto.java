@@ -81,4 +81,18 @@ public class ArticleDto {
     public void setUser(UserDto user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "ArticleDto{" +
+                "articleId=" + articleId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", pubDate=" + pubDate +
+                ", clicks=" + clicks +
+                ", image='" + image + '\'' +
+                ", category=" + category +
+                ", user=" + user +
+                '}';
+    }
 }

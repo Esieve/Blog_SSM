@@ -8,7 +8,9 @@ import tech.acodesigner.entity.User;
  */
 public interface UserDao {
 
-    public UserDto getUser(User user);
+    public UserDto getUserByUserId(int userId);
+
+    public UserDto getUserByUser(User user);
 
     public int saveUser(User user);
 

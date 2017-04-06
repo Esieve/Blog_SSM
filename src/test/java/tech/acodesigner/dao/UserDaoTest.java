@@ -23,7 +23,7 @@ public class UserDaoTest {
     @Test
     public void getUser() throws Exception {
         User user = new User("root", "ICy5YqxZB1uWSwcVLSNLcA==");
-        UserDto result = userDao.getUser(user);
+        UserDto result = userDao.getUserByUser(user);
         if (result == null) {
             System.out.println("NULL");
         } else {

@@ -22,7 +22,7 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleDao articleDao;
 
     public OperationResult<List<ArticleDto>> searchArticles(String key) {
-        List<ArticleDto> articles = articleDao.searchArticles(key);
+        List<ArticleDto> articles = articleDao.getArticlesByKey(key);
         OperationResult<List<ArticleDto>> op = new OperationResult<List<ArticleDto>>();
         if (articles.size() == 0) {
             op.setSuccess(false);
@@ -35,7 +35,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     public List<ArticleDto> pagination(PageUtil pageUtil) {
-        return articleDao.pagination(pageUtil);
+        return articleDao.getArticlesByRange(pageUtil);
     }
 
     public OperationResult<ArticleLiteDto> getPreArticle(int articleId) {

@@ -25,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     public OperationResult<Category> getCategory(int categoryId) {
         OperationResult<Category> or = new OperationResult<Category>();
-        Category category = categoryDao.getCategory(categoryId);
+        Category category = categoryDao.getCategoryByCategoryId(categoryId);
         if (category == null) {
             or.setSuccess(false);
             or.setInfo("该分类不存在");

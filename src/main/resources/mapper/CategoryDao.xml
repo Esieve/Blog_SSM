@@ -6,13 +6,13 @@
 <mapper namespace="tech.acodesigner.dao.CategoryDao">
 
     <select id="getCategories" resultType="CategoryDto">
-        SELECT blog_category.categoryId,categoryName,COUNT(articleId) AS categoryCount
+        SELECT blog_category.categoryId,categoryName,COUNT(articleId) AS articleNum
         FROM blog_article RIGHT JOIN blog_category
         ON blog_article.categoryId=blog_category.categoryId
         WHERE blog_category.categoryId>1 GROUP BY categoryName
     </select>
-    
-    <select id="getCategory" resultType="Category" parameterType="int">
+
+    <select id="getCategoryByCategoryId" resultType="Category" parameterType="int">
         SELECT * FROM blog_category WHERE categoryId=#{categoryId}
     </select>
 

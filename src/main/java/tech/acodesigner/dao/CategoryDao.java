@@ -12,7 +12,7 @@ public interface CategoryDao {
 
     public List<CategoryDto> getCategories();
 
-    public Category getCategory(int categoryId);
+    public Category getCategoryByCategoryId(int categoryId);
 
     public int saveCategory(String categoryName);
 

@@ -5,6 +5,12 @@
 
 <mapper namespace="tech.acodesigner.dao.ArticleDao">
 
+    <resultMap id="articleDtoResultMap" type="tech.acodesigner.dto.ArticleDto">
+        <association property="category" column="categoryId"
+                     select="tech.acodesigner.dao.CategoryDao.getCategoryByCategoryId"/>
+        <association property="user" column="userId" select="tech.acodesigner.dao.UserDao.getUserByUserId"/>
+    </resultMap>
+
     <select id="getAbout" resultType="AboutDto">
         SELECT content FROM blog_article WHERE categoryId = 1
     </select>
@@ -12,22 +18,6 @@
     <update id="updateAbout" parameterType="string">
         UPDATE blog_article SET content=#{content} WHERE categoryId=1
     </update>
-
-    <select id="searchArticles" resultType="ArticleDto" parameterType="string">
-        SELECT * FROM blog_article t1,blog_category t2,blog_user t3
-        WHERE t1.categoryId=t2.categoryId
-        AND t1.userId = t3.userId
-        AND title LIKE CONCAT('%',#{_parameter},'%')
-        AND t1.categoryId>1
-        ORDER BY pubDate DESC
-    </select>
-
-    <select id="pagination" resultType="ArticleDto" parameterType="PageUtil">
-        SELECT * FROM blog_article t1,blog_category t2,blog_user t3
-        WHERE t1.categoryId=t2.categoryId AND t1.userId = t3.userId AND t1.categoryId>1
-        ORDER BY pubDate DESC
-        LIMIT #{start}, #{pageSize}
-    </select>
 
     <select id="getPreArticle" resultType="ArticleLiteDto" parameterType="int">
         SELECT * FROM blog_article WHERE articleId =
@@ -43,14 +33,46 @@
         ORDER BY articleId ASC LIMIT 1)
     </select>
 
-    <select id="getArticleById" resultType="ArticleDto" parameterType="int">
-        SELECT * FROM blog_article t1,blog_category t2,blog_user t3
-        WHERE t1.categoryId=t2.categoryId AND t1.userId=t3.userId AND t1.articleId=#{articleId}
+    <select id="getArticleById" parameterType="int" resultMap="articleDtoResultMap">
+        SELECT * FROM blog_article
+        WHERE articleId=#{articleId}
     </select>
 
-    <select id="getArticles" resultType="ArticleDto">
+    <select id="getArticles" resultMap="articleDtoResultMap">
         SELECT articleId,title,content,pubDate FROM blog_article
         WHERE categoryId>1 ORDER BY pubDate DESC
+    </select>
+
+    <select id="getArticlesByKey" resultMap="articleDtoResultMap" parameterType="string">
+        SELECT
+            articleId,
+            userId,
+            categoryId,
+            title,
+            categoryId,
+            pubDate,
+            image,
+            clicks
+        FROM blog_article
+        WHERE title LIKE CONCAT('%', #{_parameter}, '%')
+              AND categoryId > 1
+        ORDER BY pubDate DESC
+    </select>
+
+    <select id="getArticlesByRange" resultMap="articleDtoResultMap" parameterType="PageUtil">
+        SELECT
+            articleId,
+            userId,
+            categoryId,
+            title,
+            categoryId,
+            pubDate,
+            image,
+            clicks
+        FROM blog_article
+        WHERE categoryId > 1
+        ORDER BY pubDate DESC
+        LIMIT #{start}, #{pageSize}
     </select>
 
     <select id="getArticlesByCategoryId" resultType="ArticleLiteDto" parameterType="int">

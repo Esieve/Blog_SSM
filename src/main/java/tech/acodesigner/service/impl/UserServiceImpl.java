@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService{
 
     public OperationResult<UserDto> checkUser(User user) {
         OperationResult<UserDto> or = new OperationResult<UserDto>();
-        UserDto result = userDao.getUser(user);
+        UserDto result = userDao.getUserByUser(user);
         if (result == null) {
             or.setSuccess(false);
             or.setInfo("用户名或密码错误");

@@ -5,7 +5,12 @@
 
 <mapper namespace="tech.acodesigner.dao.UserDao">
 
-    <select id="getUser" resultType="UserDto" parameterType="User">
+    <select id="getUserByUserId" resultType="UserDto" parameterType="int">
+        SELECT userId,username,userType,image FROM blog_user
+        WHERE userId=#{userId}
+    </select>
+
+    <select id="getUserByUser" resultType="UserDto" parameterType="User">
         SELECT userId,username,userType,image FROM blog_user
         WHERE username=#{username} AND password=#{password};
     </select>

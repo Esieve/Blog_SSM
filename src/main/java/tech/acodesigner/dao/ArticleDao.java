@@ -18,10 +18,6 @@ public interface ArticleDao {
 
     public int updateAbout(String content);
 
-    public List<ArticleDto> searchArticles(String key);
-
-    public List<ArticleDto> pagination(PageUtil pageUtil);
-
     public ArticleLiteDto getPreArticle(int articleId);
 
     public ArticleLiteDto getNextArticle(int articleId);
@@ -29,6 +25,10 @@ public interface ArticleDao {
     public ArticleDto getArticleById(int articleId);
 
     public List<ArticleDto> getArticles();
+
+    public List<ArticleDto> getArticlesByKey(String key);
+
+    public List<ArticleDto> getArticlesByRange(PageUtil pageUtil);
 
     public List<ArticleLiteDto> getArticlesByCategoryId(int categoryId);
 

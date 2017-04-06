@@ -32,7 +32,7 @@ public class CategoryDaoTest {
 
     @Test
     public void getCategory() throws Exception {
-        Category category = categoryDao.getCategory(1);
+        Category category = categoryDao.getCategoryByCategoryId(1);
         System.out.println(category);
     }
 
