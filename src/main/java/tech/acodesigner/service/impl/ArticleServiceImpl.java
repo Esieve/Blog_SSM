@@ -29,30 +29,20 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.getArticlesByRange(pageUtil);
     }
 
-    public OperationResult<ArticleLiteDto> getPreArticle(int articleId) {
+    public ArticleLiteDto getPreArticle(int articleId) {
         ArticleLiteDto article = articleDao.getPreArticle(articleId);
-        OperationResult<ArticleLiteDto> or = new OperationResult<ArticleLiteDto>();
         if (article == null) {
-            or.setSuccess(false);
-            or.setInfo("无");
-        } else {
-            or.setSuccess(true);
-            or.setData(article);
+            article = new ArticleLiteDto(0, "无");
         }
-        return or;
+        return article;
     }
 
-    public OperationResult<ArticleLiteDto> getNextArticle(int articleId) {
+    public ArticleLiteDto getNextArticle(int articleId) {
         ArticleLiteDto article = articleDao.getNextArticle(articleId);
-        OperationResult<ArticleLiteDto> or = new OperationResult<ArticleLiteDto>();
         if (article == null) {
-            or.setSuccess(false);
-            or.setInfo("无");
-        } else {
-            or.setSuccess(true);
-            or.setData(article);
+            article = new ArticleLiteDto(0, "无");
         }
-        return or;
+        return article;
     }
 
     public OperationResult<ArticleDto> getArticleById(int articleId) {
@@ -74,6 +64,10 @@ public class ArticleServiceImpl implements ArticleService {
 
     public List<ArticleLiteDto> getArticlesByCategoryId(int categoryId) {
         return articleDao.getArticlesByCategoryId(categoryId);
+    }
+
+    public List<ArticleLiteDto> getRecentArticles() {
+        return articleDao.getRecentArticlesTitle();
     }
 
     public OperationResult updateArticle(Article article) {

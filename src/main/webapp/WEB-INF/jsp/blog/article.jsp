@@ -19,14 +19,14 @@
                 <div class="card-content">
                     『${article.pubDate }』
                     <span>|</span>
-                    <a href="category?categoryId=${article.category.categoryId}">${article.category.categoryName}</a>
+                    <a href="/blog/category/${article.category.categoryId}">${article.category.categoryName}</a>
                     <span>|</span>
                         ${article.clicks}&nbspViews
                     <span>|</span>
                     author：<a onclick="return false;" style="cursor: pointer;">${article.user.username}</a>
                 </div>
                 <div class="card-action">
-                    <a href="article?articleId=${article.articleId}">详情</a>
+                    <a href="/blog/article/${article.articleId}">详情</a>
                 </div>
             </div>
         </div>

@@ -17,15 +17,17 @@ public interface ArticleService {
 
     public List<ArticleDto> pagination(PageUtil pageUtil);
 
-    public OperationResult<ArticleLiteDto> getPreArticle(int articleId);
+    public ArticleLiteDto getPreArticle(int articleId);
 
-    public OperationResult<ArticleLiteDto> getNextArticle(int articleId);
+    public ArticleLiteDto getNextArticle(int articleId);
 
     public OperationResult<ArticleDto> getArticleById(int articleId);
 
     public List<ArticleDto> getArticles();
 
     public List<ArticleLiteDto> getArticlesByCategoryId(int categoryId);
+
+    public List<ArticleLiteDto> getRecentArticles();
 
     public OperationResult updateArticle(Article article);
 

@@ -11,6 +11,14 @@ public class ArticleLiteDto {
     private String title;
     private Date pubDate;
 
+    public ArticleLiteDto() {
+    }
+
+    public ArticleLiteDto(int articleId, String title) {
+        this.articleId = articleId;
+        this.title = title;
+    }
+
     public int getArticleId() {
         return articleId;
     }

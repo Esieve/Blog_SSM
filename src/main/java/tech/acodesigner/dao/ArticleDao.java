@@ -32,6 +32,8 @@ public interface ArticleDao {
 
     public List<ArticleLiteDto> getArticlesByCategoryId(int categoryId);
 
+    public List<ArticleLiteDto> getRecentArticlesTitle();
+
     public int updateArticle(Article article);
 
     public int saveArticle(Article article);

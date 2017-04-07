@@ -3,9 +3,13 @@ package tech.acodesigner.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import tech.acodesigner.dto.ArticleDto;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import tech.acodesigner.dao.ArticleDao;
+import tech.acodesigner.dto.*;
+import tech.acodesigner.entity.Category;
 import tech.acodesigner.entity.Link;
 import tech.acodesigner.service.AboutService;
 import tech.acodesigner.service.ArticleService;
@@ -14,11 +18,15 @@ import tech.acodesigner.service.LinkService;
 import tech.acodesigner.util.PageUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by 张秦遥 on 2017/4/6/0006.
  */
+@SuppressWarnings("Since15")
 @Controller
 @RequestMapping("/blog")
 public class BlogController {
@@ -35,11 +43,12 @@ public class BlogController {
     @Autowired
     private AboutService aboutService;
 
+    //博客首页
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
     public String showBlogView(HttpServletRequest request, Model model) {
+        List<ArticleLiteDto> recentArticles = articleService.getRecentArticles();
+        request.getServletContext().setAttribute("recentArticles", recentArticles);
         //TODO
-//        List<ArticleLiteDto> recentArticles = articleService.();
-//        request.getServletContext().setAttribute("recentArticles", recentArticles);
 //        ArrayList<MessageDto> recentMessages = MessageDao.getRecentMessages();
 //        request.getServletContext().setAttribute("recentMessages",recentMessages);
         List<Link> links = linkService.getLinks();
@@ -97,6 +106,71 @@ public class BlogController {
         pageCode.append("<li class='waves-effect'><a href='home?page=" + totalPage + "'><i class=\"material-icons\">last_page</i></a></li>");
         pageCode.append("</ul>");
         return pageCode.toString();
+    }
+
+    //文章详情页面
+    @RequestMapping(value = "/article/{articleId}", method = RequestMethod.GET)
+    public String showArticleDetail(@PathVariable("articleId") Integer articleId, Model model, RedirectAttributes attributes) {
+        OperationResult<ArticleDto> article = articleService.getArticleById(articleId);
+        if (article.isSuccess() == false) {
+            attributes.addFlashAttribute("info", article.getInfo());
+            return "redirect:/blog";
+        }
+        articleService.addClicks(articleId);
+        ArticleLiteDto preArticle = articleService.getPreArticle(articleId);
+        ArticleLiteDto nextArticle = articleService.getNextArticle(articleId);
+        // TODO: 2017/4/7/0007
+//        ArrayList<MessageDto> comments = MessageDao.getComments(Integer.parseInt(id));
+//        model.addAttribute("type", 0);
+//        model.addAttribute("replytype", 2);
+        model.addAttribute("articleId", articleId);
+//        model.addAttribute("pid", articleId);
+//        model.addAttribute("messages", comments);
+        model.addAttribute("article", article.getData());
+        model.addAttribute("preArticle", preArticle);
+        model.addAttribute("nextArticle", nextArticle);
+        model.addAttribute("mainPage", "articleDetail.jsp");
+        return "blog/blog";
+    }
+
+    //分类页面
+    @RequestMapping(value = {"/category", "/category/{categoryId}"}, method = RequestMethod.GET)
+    public String showCategoryView(@PathVariable("categoryId") Optional<Integer> categoryId, Model model) {
+        if (categoryId.isPresent()) {
+            model.addAttribute("categoryId", categoryId.get().intValue());
+        } else {
+            model.addAttribute("categoryId", null);
+        }
+        List<CategoryDto> categories = categoryService.getCategories();
+        Map<Integer, List<ArticleLiteDto>> articlesList = new HashMap<Integer, List<ArticleLiteDto>>();
+        for (CategoryDto category : categories) {
+            List<ArticleLiteDto> articles = articleService.getArticlesByCategoryId(category.getCategoryId());
+            articlesList.put(category.getCategoryId(), articles);
+        }
+        model.addAttribute("categories", categories);
+        model.addAttribute("articlesList", articlesList);
+        model.addAttribute("mainPage", "category.jsp");
+        return "blog/blog";
+    }
+
+    //归档页面
+    @RequestMapping(value = "/archive", method = RequestMethod.GET)
+    public String showArchiveView(Model model) {
+        List<ArticleDto> articles = articleService.getArticles();
+        model.addAttribute("articles", articles);
+        model.addAttribute("mainPage", "archive.jsp");
+        return "blog/blog";
+    }
+
+    //留言页面
+    // TODO: 2017/4/7/0007
+    //关于页面
+    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    public String showAboutView(Model model, RedirectAttributes attributes) {
+        AboutDto about = aboutService.getAbout();
+        model.addAttribute("about", about);
+        model.addAttribute("mainPage", "about.jsp");
+        return "blog/blog";
     }
 
 }

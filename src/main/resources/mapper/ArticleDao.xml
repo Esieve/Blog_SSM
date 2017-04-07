@@ -80,6 +80,16 @@
         WHERE categoryId=#{categoryId} ORDER BY pubDate DESC
     </select>
 
+    <select id="getRecentArticlesTitle" resultType="ArticleLiteDto">
+        SELECT
+            articleId,
+            title
+        FROM blog_article
+        WHERE categoryId > 1
+        ORDER BY pubDate DESC
+        LIMIT 0,5
+    </select>
+
     <update id="updateArticle" parameterType="Article">
         UPDATE blog_article
         SET categoryId=#{categoryId},title=#{title},content=#{content},image=#{image}

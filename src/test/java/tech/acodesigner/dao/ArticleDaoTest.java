@@ -89,6 +89,14 @@ public class ArticleDaoTest {
     }
 
     @Test
+    public void getRecentArticlesTitle() {
+        List<ArticleLiteDto> articles = articleDao.getRecentArticlesTitle();
+        for (ArticleLiteDto article : articles) {
+            System.out.println(article.getTitle());
+        }
+    }
+
+    @Test
     public void updateArticle() throws Exception {
         Article article = new Article();
         article.setArticleId(13);
