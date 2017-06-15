@@ -27,7 +27,7 @@ public interface ArticleService {
 
     public List<ArticleLiteDto> getArticlesByCategoryId(int categoryId);
 
-    public List<ArticleLiteDto> getRecentArticles();
+//    public List<ArticleLiteDto> getRecentArticles();
 
     public OperationResult updateArticle(Article article);
 

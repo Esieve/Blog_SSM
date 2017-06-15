@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tech.acodesigner.dto.*;
 import tech.acodesigner.entity.Link;
@@ -45,45 +46,42 @@ public class BlogController {
     private AboutService aboutService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String showBlogView(HttpServletRequest request, Model model) {
-        //TODO
+    public String showBlogView(HttpServletRequest request, Model model, @RequestParam(value = "page", required = false) String page,
+                               @RequestParam(value = "search", required = false) String search) {
         List<ArticleDto> recentArticles = articleService.pagination(new PageUtil(1, 5));
         request.getServletContext().setAttribute("recentArticles", recentArticles);
-//        ArrayList<MessageDto> recentMessages = MessageDao.getRecentMessages();
-//        request.getServletContext().setAttribute("recentMessages",recentMessages);
         List<Link> links = linkService.getLinks();
         request.getServletContext().setAttribute("links", links);
 
-        String page = request.getParameter("page");
-        String search = request.getParameter("search");
-        String s_content = request.getParameter("s_content");
         if (page == null || page == "") {
             page = "1";
         }
         PageUtil pageUtil = new PageUtil(Integer.parseInt(page), 3);
         List<ArticleDto> articles = null;
-        if (search != null && search.equals("true") && s_content != null && !s_content.equals("")) {
-            articles = articleService.searchArticles(s_content);
+        String pageCode = null;
+        if (search != null && !search.equals("")) {
+            articles = articleService.searchArticles(search);
+            pageCode = this.genPagination(articles.size(), Integer.parseInt(page), 3, "&search=" + search);
         } else {
             articles = articleService.pagination(pageUtil);
+            int total = articleService.countArticleNum();
+            pageCode = this.genPagination(total, Integer.parseInt(page), 3, "");
         }
-        int total = articleService.countArticleNum();
-        String pageCode = this.genPagination(total, Integer.parseInt(page), 3);
         model.addAttribute("pageCode", pageCode);
         model.addAttribute("articles", articles);
         model.addAttribute("mainPage", "article.jsp");
         return "blog/blog";
     }
 
-    private String genPagination(int totalNum, int curPage, int pageSize) {
+    private String genPagination(int totalNum, int curPage, int pageSize, String search) {
         int totalPage = totalNum % pageSize == 0 ? totalNum / pageSize : totalNum / pageSize + 1;
         StringBuffer pageCode = new StringBuffer();
         pageCode.append("<ul class=\"pagination\">");
-        pageCode.append("<li class='waves-effect'><a href='home?page=1'><i class=\"material-icons\">first_page</i></a></li>");
+        pageCode.append("<li class='waves-effect'><a href='blog?page=1'" + search + "><i class=\"material-icons\">first_page</i></a></li>");
         if (curPage == 1) {
             pageCode.append("<li class=\"disabled\"><a><i class=\"material-icons\">chevron_left</i></a></li>");
         } else {
-            pageCode.append("<li class='waves-effect'><a href=\"home?page=" + (curPage - 1) + "\"><i class=\"material-icons\">chevron_left</i></a></li>");
+            pageCode.append("<li class='waves-effect'><a href=\"blog?page=" + (curPage - 1) + search + "\"><i class=\"material-icons\">chevron_left</i></a></li>");
         }
         for (int i = curPage - 2; i <= curPage + 2; i++) {
             if (i < 1 || i > totalPage) {
@@ -93,17 +91,17 @@ public class BlogController {
                 pageCode.append("<li class='active waves-effect'><a href='#'>" + i
                         + "</a></li>");
             } else {
-                pageCode.append("<li class='waves-effect'><a href='home?page=" + i + "'>" + i
+                pageCode.append("<li class='waves-effect'><a href='blog?page=" + i + "'>" + i
                         + "</a></li>");
             }
         }
         if (curPage == totalPage) {
             pageCode.append("<li class='disabled'><a><i class=\"material-icons\">chevron_right</i></a></li>");
         } else {
-            pageCode.append("<li class='waves-effect'><a href='home?page=" + (curPage + 1)
+            pageCode.append("<li class='waves-effect'><a href='blog?page=" + (curPage + 1) + search
                     + "'><i class=\"material-icons\">chevron_right</i></a></li>");
         }
-        pageCode.append("<li class='waves-effect'><a href='home?page=" + totalPage + "'><i class=\"material-icons\">last_page</i></a></li>");
+        pageCode.append("<li class='waves-effect'><a href='blog?page=" + totalPage + search + "'><i class=\"material-icons\">last_page</i></a></li>");
         pageCode.append("</ul>");
         return pageCode.toString();
     }
@@ -119,12 +117,7 @@ public class BlogController {
             }
             ArticleLiteDto preArticle = articleService.getPreArticle(articleId);
             ArticleLiteDto nextArticle = articleService.getNextArticle(articleId);
-//            List<MessageDto> comments = MessageDao.getComments(Integer.parseInt(id)); todo
-            model.addAttribute("type", 0);
-            model.addAttribute("replytype", 2);
             model.addAttribute("articleId", articleId);
-//            model.addAttribute("pid", articleId);
-//            model.addAttribute("messages", comments);
             model.addAttribute("article", articleResult.getData());
             model.addAttribute("preArticle", preArticle);
             model.addAttribute("nextArticle", nextArticle);

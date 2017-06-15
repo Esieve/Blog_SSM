@@ -29,8 +29,8 @@
                 <li><a href="/blog/message" class="grey-text"><i class="material-icons left">message</i>留言</a>
                 </li>
                 <li><a href="/blog/about" class="grey-text"><i class="material-icons left">error</i>关于</a></li>
-                <li><a href="/blog/login" class="waves-effect waves-green btn orange hoverable"><i
-                        class="material-icons left">person</i>登录</a></li>
+                <li><a href="/login" class="waves-effect waves-green btn orange hoverable"><i
+                        class="material-icons left">person</i>后台</a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
                 <li><a href="home" class="grey-text">首页</a></li>
@@ -38,7 +38,7 @@
                 <li><a href="archive" class="grey-text">归档</a></li>
                 <li><a href="message" class="grey-text">留言</a></li>
                 <li><a href="about" class="grey-text">关于</a></li>
-                <li><a href="login.jsp" class="grey-text">登录</a></li>
+                <li><a href="login.jsp" class="grey-text">后台</a></li>
             </ul>
         </div>
     </nav>
@@ -55,9 +55,9 @@
         <div class="col s4">
             <nav style="margin-top: 30px;margin-bottom: 15px" class="indigo lighten-1 hoverable">
                 <div class="nav-wrapper">
-                    <form method="post" action="home?search=true">
+                    <form method="get" action="/blog">
                         <div class="input-field">
-                            <input id="search" type="search" name="s_content" required>
+                            <input id="search" type="search" name="search" required>
                             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                             <i class="material-icons">close</i>
                         </div>
