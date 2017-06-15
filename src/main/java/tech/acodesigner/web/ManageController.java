@@ -161,8 +161,6 @@ public class ManageController {
         return "redirect:/manage/category";
     }
 
-    //对消息的管理
-    //TODO
     //对链接的管理
     @RequestMapping(value = "/link", method = RequestMethod.GET)
     public String showLinkList(Model model) {

@@ -16,7 +16,7 @@
                     <a href="/blog" class="breadcrumb">首页</a>
                     <a href="/blog/category/${article.category.categoryId}"
                        class="breadcrumb">${article.category.categoryName}</a>
-                    <a class="breadcrumb">留言</a>
+                    <a class="breadcrumb">${article.title}</a>
                 </div>
             </div>
         </nav>
@@ -26,7 +26,7 @@
                 <span class="card-title">${article.title}</span>
                 『${article.pubDate }』
                 <span>|</span>
-                <a href="/blog/category/${article.category.categoryId}">${article.category.categoryName}</a>
+                <a href=/blog/category/${article.category.categoryId}>${article.category.categoryName}</a>
                 <span>|</span>
                 ${article.clicks + 1}&nbspViews
                 <span>|</span>
@@ -35,17 +35,15 @@
             </div>
             <div class="card-action">
                 上一篇：<a href="/blog/article/${preArticle.articleId}"
-                       <c:if test='${preArticle.articleId==0}'>onclick="return false;"</c:if>>${preArticle.title}</a>
+                       <c:if test='${preArticle.articleId==-1}'>onclick="return false;"</c:if> >${preArticle.title}</a>
                 <br>
                 下一篇：<a href="/blog/article/${nextArticle.articleId}"
-                       <c:if test='${nextArticle.articleId==0}'>onclick="return false;"</c:if>>${nextArticle.title}</a>
+                       <c:if test='${nextArticle.articleId==-1}'>onclick="return false;"</c:if> >${nextArticle.title}</a>
                 <br>
-                转载注明：<a href="/about">${article.user.username}</a>&gt;&gt;<a
+                转载注明：<a href="/blog/about">${article.user.username}</a>&gt;&gt;<a
                     href="/blog/article/${article.articleId}">${article.title}</a>
             </div>
         </div>
     </div>
 </div>
-<%--<jsp:include page="messageForm.jsp"></jsp:include>--%>
-<%--<jsp:include page="messageList.jsp"></jsp:include>--%>
-<%--TODO--%>
+<jsp:include page="messageDetail.jsp"></jsp:include>

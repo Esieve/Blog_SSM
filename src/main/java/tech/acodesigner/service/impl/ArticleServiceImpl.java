@@ -32,17 +32,19 @@ public class ArticleServiceImpl implements ArticleService {
     public ArticleLiteDto getPreArticle(int articleId) {
         ArticleLiteDto article = articleDao.getPreArticle(articleId);
         if (article == null) {
-            article = new ArticleLiteDto(0, "无");
+            return new ArticleLiteDto(-1, "这已经是第一篇了");
+        } else {
+            return article;
         }
-        return article;
     }
 
     public ArticleLiteDto getNextArticle(int articleId) {
         ArticleLiteDto article = articleDao.getNextArticle(articleId);
         if (article == null) {
-            article = new ArticleLiteDto(0, "无");
+            return new ArticleLiteDto(-1, "这已经是最后一篇了");
+        } else {
+            return article;
         }
-        return article;
     }
 
     public OperationResult<ArticleDto> getArticleById(int articleId) {
@@ -64,10 +66,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     public List<ArticleLiteDto> getArticlesByCategoryId(int categoryId) {
         return articleDao.getArticlesByCategoryId(categoryId);
-    }
-
-    public List<ArticleLiteDto> getRecentArticles() {
-        return articleDao.getRecentArticlesTitle();
     }
 
     public OperationResult updateArticle(Article article) {
@@ -114,10 +112,10 @@ public class ArticleServiceImpl implements ArticleService {
         int result = articleDao.addClicks(articleId);
         if (result <= 0) {
             or.setSuccess(false);
-            or.setInfo("操作失败");
+            or.setInfo("点击量增加失败");
         } else {
             or.setSuccess(true);
-            or.setInfo("操作成功");
+            or.setInfo("点击量增加成功");
         }
         return or;
     }

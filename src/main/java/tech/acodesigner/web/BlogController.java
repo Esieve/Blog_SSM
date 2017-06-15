@@ -1,5 +1,7 @@
 package tech.acodesigner.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,9 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import tech.acodesigner.dao.ArticleDao;
 import tech.acodesigner.dto.*;
-import tech.acodesigner.entity.Category;
 import tech.acodesigner.entity.Link;
 import tech.acodesigner.service.AboutService;
 import tech.acodesigner.service.ArticleService;
@@ -20,7 +20,6 @@ import tech.acodesigner.util.PageUtil;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -30,6 +29,8 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/blog")
 public class BlogController {
+
+    private final static Logger logger = LoggerFactory.getLogger(BlogController.class);
 
     @Autowired
     private ArticleService articleService;
@@ -43,12 +44,11 @@ public class BlogController {
     @Autowired
     private AboutService aboutService;
 
-    //博客首页
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(method = RequestMethod.GET)
     public String showBlogView(HttpServletRequest request, Model model) {
-        List<ArticleLiteDto> recentArticles = articleService.getRecentArticles();
-        request.getServletContext().setAttribute("recentArticles", recentArticles);
         //TODO
+        List<ArticleDto> recentArticles = articleService.pagination(new PageUtil(1, 5));
+        request.getServletContext().setAttribute("recentArticles", recentArticles);
 //        ArrayList<MessageDto> recentMessages = MessageDao.getRecentMessages();
 //        request.getServletContext().setAttribute("recentMessages",recentMessages);
         List<Link> links = linkService.getLinks();
@@ -108,44 +108,47 @@ public class BlogController {
         return pageCode.toString();
     }
 
-    //文章详情页面
+    //文章详情页的展示
     @RequestMapping(value = "/article/{articleId}", method = RequestMethod.GET)
-    public String showArticleDetail(@PathVariable("articleId") Integer articleId, Model model, RedirectAttributes attributes) {
-        OperationResult<ArticleDto> article = articleService.getArticleById(articleId);
-        if (article.isSuccess() == false) {
-            attributes.addFlashAttribute("info", article.getInfo());
+    public String showArticleView(@PathVariable("articleId") int articleId, Model model, RedirectAttributes attributes) {
+        OperationResult<ArticleDto> articleResult = articleService.getArticleById(articleId);
+        if (articleResult.isSuccess()) {
+            OperationResult addClickResult = articleService.addClicks(articleId);
+            if (addClickResult.isSuccess() == false) {
+                logger.error("add click error.\tarticle:%s", articleId);
+            }
+            ArticleLiteDto preArticle = articleService.getPreArticle(articleId);
+            ArticleLiteDto nextArticle = articleService.getNextArticle(articleId);
+//            List<MessageDto> comments = MessageDao.getComments(Integer.parseInt(id)); todo
+            model.addAttribute("type", 0);
+            model.addAttribute("replytype", 2);
+            model.addAttribute("articleId", articleId);
+//            model.addAttribute("pid", articleId);
+//            model.addAttribute("messages", comments);
+            model.addAttribute("article", articleResult.getData());
+            model.addAttribute("preArticle", preArticle);
+            model.addAttribute("nextArticle", nextArticle);
+            model.addAttribute("mainPage", "articleDetail.jsp");
+            return "blog/blog";
+        } else {
+            attributes.addFlashAttribute("info", articleResult.getInfo());
             return "redirect:/blog";
         }
-        articleService.addClicks(articleId);
-        ArticleLiteDto preArticle = articleService.getPreArticle(articleId);
-        ArticleLiteDto nextArticle = articleService.getNextArticle(articleId);
-        // TODO: 2017/4/7/0007
-//        ArrayList<MessageDto> comments = MessageDao.getComments(Integer.parseInt(id));
-//        model.addAttribute("type", 0);
-//        model.addAttribute("replytype", 2);
-        model.addAttribute("articleId", articleId);
-//        model.addAttribute("pid", articleId);
-//        model.addAttribute("messages", comments);
-        model.addAttribute("article", article.getData());
-        model.addAttribute("preArticle", preArticle);
-        model.addAttribute("nextArticle", nextArticle);
-        model.addAttribute("mainPage", "articleDetail.jsp");
-        return "blog/blog";
     }
 
-    //分类页面
+    //类别列表的展示
     @RequestMapping(value = {"/category", "/category/{categoryId}"}, method = RequestMethod.GET)
     public String showCategoryView(@PathVariable("categoryId") Optional<Integer> categoryId, Model model) {
-        if (categoryId.isPresent()) {
-            model.addAttribute("categoryId", categoryId.get().intValue());
-        } else {
-            model.addAttribute("categoryId", null);
-        }
         List<CategoryDto> categories = categoryService.getCategories();
-        Map<Integer, List<ArticleLiteDto>> articlesList = new HashMap<Integer, List<ArticleLiteDto>>();
+        HashMap<Integer, List<ArticleLiteDto>> articlesList = new HashMap<Integer, List<ArticleLiteDto>>();
         for (CategoryDto category : categories) {
             List<ArticleLiteDto> articles = articleService.getArticlesByCategoryId(category.getCategoryId());
             articlesList.put(category.getCategoryId(), articles);
+        }
+        if (categoryId.isPresent()) {
+            model.addAttribute("categoryId", categoryId.get());
+        } else {
+            model.addAttribute("categoryId", "");
         }
         model.addAttribute("categories", categories);
         model.addAttribute("articlesList", articlesList);
@@ -153,7 +156,7 @@ public class BlogController {
         return "blog/blog";
     }
 
-    //归档页面
+    //归档列表展示
     @RequestMapping(value = "/archive", method = RequestMethod.GET)
     public String showArchiveView(Model model) {
         List<ArticleDto> articles = articleService.getArticles();
@@ -162,15 +165,20 @@ public class BlogController {
         return "blog/blog";
     }
 
-    //留言页面
-    // TODO: 2017/4/7/0007
-    //关于页面
+    //对消息的管理
+    @RequestMapping(value = "/message", method = RequestMethod.GET)
+    public String showMessageView(Model model) {
+        model.addAttribute("articleId", 0);
+        model.addAttribute("mainPage", "message.jsp");
+        return "blog/blog";
+    }
+
+    //关于页面的展示
     @RequestMapping(value = "/about", method = RequestMethod.GET)
-    public String showAboutView(Model model, RedirectAttributes attributes) {
+    public String showAboutView(Model model) {
         AboutDto about = aboutService.getAbout();
         model.addAttribute("about", about);
         model.addAttribute("mainPage", "about.jsp");
         return "blog/blog";
     }
-
 }

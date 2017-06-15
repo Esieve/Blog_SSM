@@ -32,7 +32,6 @@
                 <li><a href="/manage/article" class="grey-text"><i class="material-icons left">border_color</i>文章</a>
                 </li>
                 <li><a href="/manage/category" class="grey-text"><i class="material-icons left">view_list</i>分类</a></li>
-                <li><a href="/manage/message" class="grey-text"><i class="material-icons left">message</i>消息</a></li>
                 <li><a href="/manage/link" class="grey-text"><i class="material-icons left">open_in_browser</i>链接</a>
                 </li>
                 <li><a href="/manage/image" class="grey-text"><i class="material-icons left">photo</i>图片</a></li>
@@ -43,7 +42,6 @@
             <ul class="side-nav" id="mobile-demo">
                 <li><a href="/manage/article" class="grey-text">文章</a></li>
                 <li><a href="/manage/category" class="grey-text">分类</a></li>
-                <li><a href="/manage/message" class="grey-text">消息</a></li>
                 <li><a href="/manage/link" class="grey-text">链接</a></li>
                 <li><a href="/manage/image" class="grey-text">图片</a></li>
                 <li><a href="/manage/about" class="grey-text">关于</a></li>
