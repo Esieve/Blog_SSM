@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="card-panel hoverable">
-
     <div class="center-align" style="margin-bottom: 40px">
         <h4><a href="blog" class="brand-logo indigo-text darken-3">ACodesigner's Blog</a></h4>
     </div>

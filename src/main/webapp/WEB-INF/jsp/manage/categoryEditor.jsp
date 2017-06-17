@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript">
-    function notEmpty() {
+    function check() {
         var categoryName = document.getElementById("categoryName").value;
         if (categoryName == null || categoryName == "") {
             $("#info").text("类别名称不能为空！");
@@ -21,7 +21,7 @@
     <div class="col s12">
         <div class="card-panel">
             <form action="/manage/category/save/${category.categoryId}" method="post"
-                  onsubmit="return notEmpty()">
+                  onsubmit="return check()">
                 <div class="input-field col s6">
                     <input id="categoryName" name="categoryName" type="text" class="validate"
                            value="${category.categoryName}">

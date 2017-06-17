@@ -30,7 +30,7 @@
                 </li>
                 <li><a href="/blog/about" class="grey-text"><i class="material-icons left">error</i>关于</a></li>
                 <li><a href="/login" class="waves-effect waves-green btn orange hoverable"><i
-                        class="material-icons left">person</i>后台</a></li>
+                        class="material-icons left">person</i>控制台</a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
                 <li><a href="home" class="grey-text">首页</a></li>
@@ -38,7 +38,7 @@
                 <li><a href="archive" class="grey-text">归档</a></li>
                 <li><a href="message" class="grey-text">留言</a></li>
                 <li><a href="about" class="grey-text">关于</a></li>
-                <li><a href="login.jsp" class="grey-text">后台</a></li>
+                <li><a href="login.jsp" class="grey-text">控制台</a></li>
             </ul>
         </div>
     </nav>

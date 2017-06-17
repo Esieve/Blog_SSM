@@ -5,9 +5,13 @@
 
 <mapper namespace="tech.acodesigner.dao.UserDao">
 
+    <select id="getUsers" resultType="UserDto">
+        SELECT * FROM blog_user WHERE userType=0;
+    </select>
+
     <select id="getUserByUserId" resultType="UserDto" parameterType="int">
         SELECT userId,username,userType,image FROM blog_user
-        WHERE userId=#{userId}
+        WHERE userId=#{userId} AND userType=0;
     </select>
 
     <select id="getUserByUser" resultType="UserDto" parameterType="User">
@@ -20,4 +24,13 @@
         VALUES (NULL ,0,#{username},#{password},#{image});
     </insert>
 
+    <update id="updateUser" parameterType="User">
+        UPDATE blog_user SET username=#{username}, password=#{password}, image=#{image}
+        WHERE userId=#{userId} AND userType=0;
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM blog_user
+        WHERE userId=#{userId} AND userType=0;
+    </delete>
 </mapper>

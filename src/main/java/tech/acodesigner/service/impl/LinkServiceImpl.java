@@ -40,10 +40,10 @@ public class LinkServiceImpl implements LinkService {
         int result = linkDao.saveLink(link);
         if (result <= 0) {
             or.setSuccess(false);
-            or.setInfo("添加失败");
+            or.setInfo("添加链接失败");
         } else {
             or.setSuccess(true);
-            or.setInfo("添加成功");
+            or.setInfo("添加链接成功");
         }
         return or;
     }
@@ -53,10 +53,10 @@ public class LinkServiceImpl implements LinkService {
         int result = linkDao.updateLink(link);
         if (result <= 0) {
             or.setSuccess(false);
-            or.setInfo("修改失败");
+            or.setInfo("修改链接失败");
         } else {
             or.setSuccess(true);
-            or.setInfo("修改成功");
+            or.setInfo("修改链接成功");
         }
         return or;
     }
@@ -66,10 +66,10 @@ public class LinkServiceImpl implements LinkService {
         int result = linkDao.deleteLink(linkId);
         if (result <= 0) {
             or.setSuccess(false);
-            or.setInfo("删除失败");
+            or.setInfo("删除链接失败");
         } else {
             or.setSuccess(true);
-            or.setInfo("删除成功");
+            or.setInfo("删除链接成功");
         }
         return or;
     }

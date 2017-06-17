@@ -29,7 +29,6 @@ public class LoginController {
 
     @RequestMapping(method = {RequestMethod.GET})
     public String showLoginView(Model model) {
-        model.addAttribute("mainPage", "loginCard.jsp");
         return "login/login";
     }
 
@@ -39,7 +38,7 @@ public class LoginController {
         User user = new User(request.getParameter("username"), MD5Util.encoderPassword(request.getParameter("password")));
         OperationResult<UserDto> result = userService.checkUser(user);
         if (result.isSuccess()) {
-            session.setAttribute("user", result.getData());
+            session.setAttribute("curUser", result.getData());
             if (result.getData().getUserType() == 0) {
                 return "redirect:/blog";
             } else {

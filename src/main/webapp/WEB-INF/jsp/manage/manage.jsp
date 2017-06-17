@@ -35,6 +35,8 @@
                 <li><a href="/manage/link" class="grey-text"><i class="material-icons left">open_in_browser</i>链接</a>
                 </li>
                 <li><a href="/manage/image" class="grey-text"><i class="material-icons left">photo</i>图片</a></li>
+                <li><a href="/manage/user" class="grey-text"><i class="material-icons left">account_circle</i>用户</a>
+                </li>
                 <li><a href="/manage/about" class="grey-text"><i class="material-icons left">error</i>关于</a></li>
                 <li><a href="/manage/quit" class="waves-effect waves-green btn orange hoverable"><i
                         class="material-icons left">person</i>退出登录</a></li>
@@ -44,6 +46,7 @@
                 <li><a href="/manage/category" class="grey-text">分类</a></li>
                 <li><a href="/manage/link" class="grey-text">链接</a></li>
                 <li><a href="/manage/image" class="grey-text">图片</a></li>
+                <li><a href="/manage/user" class="grey-text">用户</a></li>
                 <li><a href="/manage/about" class="grey-text">关于</a></li>
                 <li><a href="/manage/quit" class="grey-text">退出登录</a></li>
             </ul>

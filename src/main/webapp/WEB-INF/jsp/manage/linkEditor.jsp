@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript">
-    function notEmpty() {
+    function check() {
         var linkName = document.getElementById("linkName").value;
         var url = document.getElementById("url").value;
         if (linkName == null || linkName == "") {
@@ -27,7 +27,7 @@
     <div class="col s12">
         <div class="card-panel">
             <form action="/manage/link/save/${link.linkId}" method="post"
-                  onsubmit="return notEmpty()">
+                  onsubmit="return check()">
                 <div class="input-field col s6">
                     <input id="linkName" name="linkName" type="text" class="validate" value="${link.linkName}">
                     <label for="linkName">链接名</label>

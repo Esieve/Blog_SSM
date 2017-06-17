@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         HttpSession httpSession = httpServletRequest.getSession();
-        UserDto user = (UserDto) httpSession.getAttribute("user");
+        UserDto user = (UserDto) httpSession.getAttribute("curUser");
         if (user != null && user.getUserType() != 0) {
             return true;
         } else {

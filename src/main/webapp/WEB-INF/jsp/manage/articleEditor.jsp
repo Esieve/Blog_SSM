@@ -12,7 +12,7 @@
     $(document).ready(function () {
         $('select').material_select();
     });
-    function notEmpty() {
+    function check() {
         var title = document.getElementById("title").value;
         var content = CKEDITOR.instances.content.getData();
         var category = document.getElementById("categoryId").value;
@@ -37,7 +37,7 @@
 <div class="row">
     <div class="col s12">
         <div class="card-panel">
-            <form action="/manage/article/save/${article.articleId}" method="post" onsubmit="return notEmpty()">
+            <form action="/manage/article/save/${article.articleId}" method="post" onsubmit="return check()">
                 <div class="input-field col s6">
                     <input id="title" name="title" type="text" class="validate" value="${article.title}">
                     <label for="title"><i class="material-icons left">title</i>标题</label>
@@ -59,7 +59,7 @@
                         <option value="" disabled selected>图片</option>
                         <c:forEach var="image" items="${images}">
                             <option value="${image}"
-                                    data-icon="images/article/${image}" ${article.image==image?'selected':'' }>${image}</option>
+                                    data-icon="../../images/article/${image}" ${article.image==image?'selected':'' }>${image}</option>
                         </c:forEach>
                     </select>
                 </div>
