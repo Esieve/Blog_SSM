@@ -48,8 +48,10 @@ public class BlogController {
     @RequestMapping(method = RequestMethod.GET)
     public String showBlogView(HttpServletRequest request, Model model, @RequestParam(value = "page", required = false) String page,
                                @RequestParam(value = "search", required = false) String search) {
-        List<ArticleDto> recentArticles = articleService.pagination(new PageUtil(1, 5));
+        List<ArticleLiteDto> recentArticles = articleService.getRecentArticles();
+        List<ArticleLiteDto> mostViewedArticles = articleService.getMostViewedArticles();
         request.getServletContext().setAttribute("recentArticles", recentArticles);
+        request.getServletContext().setAttribute("mostViewedArticles", mostViewedArticles);
         List<Link> links = linkService.getLinks();
         request.getServletContext().setAttribute("links", links);
 

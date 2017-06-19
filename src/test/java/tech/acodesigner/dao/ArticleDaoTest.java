@@ -14,8 +14,6 @@ import tech.acodesigner.util.PageUtil;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by 77239 on 2017/4/1/0001.
  */
@@ -91,6 +89,14 @@ public class ArticleDaoTest {
     @Test
     public void getRecentArticlesTitle() {
         List<ArticleLiteDto> articles = articleDao.getRecentArticlesTitle();
+        for (ArticleLiteDto article : articles) {
+            System.out.println(article.getTitle());
+        }
+    }
+
+    @Test
+    public void getArticlesByClicks() {
+        List<ArticleLiteDto> articles = articleDao.getArticlesByClicks();
         for (ArticleLiteDto article : articles) {
             System.out.println(article.getTitle());
         }

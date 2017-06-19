@@ -75,6 +75,16 @@
         LIMIT #{start}, #{pageSize}
     </select>
 
+    <select id="getArticlesByClicks" resultType="ArticleLiteDto">
+        SELECT
+            articleId,
+            title
+        FROM blog_article
+        WHERE categoryId > 1
+        ORDER BY clicks DESC
+        LIMIT 0,5
+    </select>
+
     <select id="getArticlesByCategoryId" resultType="ArticleLiteDto" parameterType="int">
         SELECT articleId,title,pubDate FROM blog_article
         WHERE categoryId=#{categoryId} ORDER BY pubDate DESC

@@ -68,6 +68,14 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.getArticlesByCategoryId(categoryId);
     }
 
+    public List<ArticleLiteDto> getRecentArticles() {
+        return articleDao.getRecentArticlesTitle();
+    }
+
+    public List<ArticleLiteDto> getMostViewedArticles() {
+        return articleDao.getArticlesByClicks();
+    }
+
     public OperationResult updateArticle(Article article) {
         OperationResult or = new OperationResult();
         int result = articleDao.updateArticle(article);

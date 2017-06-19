@@ -1,6 +1,5 @@
 package tech.acodesigner.dao;
 
-import org.apache.ibatis.annotations.Param;
 import tech.acodesigner.dto.AboutDto;
 import tech.acodesigner.dto.ArticleDto;
 import tech.acodesigner.dto.ArticleLiteDto;
@@ -29,6 +28,8 @@ public interface ArticleDao {
     public List<ArticleDto> getArticlesByKey(String key);
 
     public List<ArticleDto> getArticlesByRange(PageUtil pageUtil);
+
+    public List<ArticleLiteDto> getArticlesByClicks();
 
     public List<ArticleLiteDto> getArticlesByCategoryId(int categoryId);
 

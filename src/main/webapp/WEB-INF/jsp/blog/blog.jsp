@@ -81,6 +81,21 @@
 
             <div class="card grey hoverable">
                 <div class="card-content white-text">
+                    <span class="card-title">最多浏览文章</span>
+                    <table>
+                        <c:forEach var="mostViewedArticle" items="${mostViewedArticles}">
+                            <tr class="hoverable">
+                                <td><a class="white-text"
+                                       href="/blog/article/${mostViewedArticle.articleId}">${mostViewedArticle.title}</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card grey hoverable">
+                <div class="card-content white-text">
                     <span class="card-title">最近回复</span>
                     <table>
                         <c:forEach var="recentMessage" items="${recentMessages}">
