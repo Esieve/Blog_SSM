@@ -10,7 +10,7 @@
 <br>
 <c:forEach var="article" items="${articles}">
     <div class="row">
-        <div class="col s10">
+        <div class="col s12">
             <div class="card small hoverable">
                 <div class="card-image">
                     <img src="images/article/${article.image}">

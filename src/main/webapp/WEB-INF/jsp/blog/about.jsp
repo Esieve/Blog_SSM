@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="row">
-    <div class="col s10">
+    <div class="col s12">
         <br>
         <nav class="indigo lighten-1">
             <div class="nav-wrapper">

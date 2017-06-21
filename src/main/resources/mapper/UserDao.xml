@@ -11,7 +11,7 @@
 
     <select id="getUserByUserId" resultType="UserDto" parameterType="int">
         SELECT userId,username,userType,image FROM blog_user
-        WHERE userId=#{userId} AND userType=0;
+        WHERE userId=#{userId};
     </select>
 
     <select id="getUserByUser" resultType="UserDto" parameterType="User">

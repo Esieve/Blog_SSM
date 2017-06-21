@@ -47,10 +47,13 @@
 <!--页面内容-->
 <div class="container">
     <div class="row ">
-        <div class="col s8">
+        <div class="col s7">
             <%@ include file="../common/info.jsp" %>
             <jsp:include page="${mainPage}"></jsp:include>
         </div>
+
+        <div class="col s1"></div>
+
         <!--搜索条-->
         <div class="col s4">
             <nav style="margin-top: 30px;margin-bottom: 15px" class="indigo lighten-1 hoverable">

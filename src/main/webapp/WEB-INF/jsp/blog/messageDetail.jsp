@@ -16,7 +16,7 @@
 </script>
 <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
 <div class="row">
-    <div class="col s10">
+    <div class="col s12">
         <div class="card-panel hoverable">
             <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
         </div>
