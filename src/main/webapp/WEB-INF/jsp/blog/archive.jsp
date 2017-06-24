@@ -19,7 +19,6 @@
 </script>
 <div class="row">
     <div class="col s12">
-        <br>
         <nav class="indigo lighten-1">
             <div class="nav-wrapper">
                 <div class="col s12">

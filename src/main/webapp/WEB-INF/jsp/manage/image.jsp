@@ -33,9 +33,9 @@
                 </c:forEach>
             </div>
             <form name="uploadForm" method="POST" enctype="multipart/form-data" action="/manage/image">
-                用户图片:<input type="file" name="userImage" size="30"/> 文章图片:<input
-                    type="file" name="articleImage" size="30"/> <input
-                    class="btn btn-primary" type="submit" name="submit" value="上传">
+                用户图片:<input type="file" name="userImage" size="30"/>
+                文章图片:<input type="file" name="articleImage" size="30"/>
+                <input class="btn btn-primary" type="submit" name="submit" value="上传">
             </form>
         </div>
     </div>

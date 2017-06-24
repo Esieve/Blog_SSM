@@ -22,6 +22,7 @@
         <div class="nav-wrapper white">
             <a href="/blog" class="brand-logo indigo-text darken-3">ACodesigner's Blog</a>
             <a href="#" data-activates="mobile-demo" class="right button-collapse grey-text"><i class="material-icons">menu</i></a>
+
             <ul class="right hide-on-med-and-down">
                 <li><a href="/blog" class="grey-text"><i class="material-icons left">home</i>首页</a></li>
                 <li><a href="/blog/category" class="grey-text"><i class="material-icons left">view_list</i>分类</a></li>
@@ -54,8 +55,8 @@
 
         <div class="col s1"></div>
 
-        <!--搜索条-->
         <div class="col s4">
+            <!--搜索条-->
             <nav style="margin-top: 30px;margin-bottom: 15px" class="indigo lighten-1 hoverable">
                 <div class="nav-wrapper">
                     <form method="get" action="/blog">
@@ -67,6 +68,33 @@
                     </form>
                 </div>
             </nav>
+
+            <div class="card grey hoverable">
+                <div class="card-content white-text">
+                    <P class="flow-text">
+                        访问量：
+                        <script type="text/javascript">
+                            var sc_project = 11378771;
+                            var sc_invisible = 0;
+                            var sc_security = "ef303859";
+                            var sc_text = 2;
+                            var scJsHost = (("https:" == document.location.protocol) ?
+                                "https://secure." : "http://www.");
+                            document.write("<sc" + "ript type='text/javascript' src='" +
+                                scJsHost +
+                                "statcounter.com/counter/counter.js'></" + "script>");
+                        </script>
+                    <noscript>
+                        <div class="statcounter">
+                            <a title="free hitcounter" href="http://statcounter.com/" target="_blank">
+                                <img class="statcounter" src="//c.statcounter.com/11378771/0/ef303859/0/"
+                                     alt="freehit counter">
+                            </a>
+                        </div>
+                    </noscript>
+                    </P>
+                </div>
+            </div>
 
             <div class="card grey hoverable">
                 <div class="card-content white-text">
