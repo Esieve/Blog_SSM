@@ -134,7 +134,7 @@ public class ArticleDaoTest {
 
     @Test
     public void addClicks() throws Exception {
-        int result = articleDao.addClicks(13);
+        int result = articleDao.addClicks(3);
         System.out.println(result);
     }
 

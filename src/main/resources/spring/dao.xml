@@ -7,8 +7,13 @@
 
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
+    <bean id="redisDao" class="tech.acodesigner.dao.cache.RedisDao">
+        <constructor-arg index="0" value="${redisUrl}"/>
+        <constructor-arg index="1" value="${redisPort}"/>
+        <constructor-arg index="2" value="${redisPassword}"/>
+    </bean>
+
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <!--<property name="driver" value="${dbDriver}"/>-->
         <property name="url" value="${dbUrl}"/>
         <property name="username" value="${dbUsername}"/>
         <property name="password" value="${dbPassword}"/>

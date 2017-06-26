@@ -3,6 +3,7 @@ package tech.acodesigner.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.acodesigner.dao.ArticleDao;
+import tech.acodesigner.dao.cache.RedisDao;
 import tech.acodesigner.dto.ArticleDto;
 import tech.acodesigner.dto.ArticleLiteDto;
 import tech.acodesigner.dto.OperationResult;
@@ -20,6 +21,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleDao articleDao;
+
+    @Autowired
+    private RedisDao redisDao;
 
     public List<ArticleDto> searchArticles(String key) {
         return articleDao.getArticlesByKey(key);
@@ -47,13 +51,18 @@ public class ArticleServiceImpl implements ArticleService {
         }
     }
 
+    //增加了redis对文章详情缓存
     public OperationResult<ArticleDto> getArticleById(int articleId) {
-        ArticleDto article = articleDao.getArticleById(articleId);
+        ArticleDto article = redisDao.getArticleByIdInCache(articleId);
+        if (article == null) {
+            article = articleDao.getArticleById(articleId);
+        }
         OperationResult<ArticleDto> or = new OperationResult<ArticleDto>();
         if (article == null) {
             or.setSuccess(false);
             or.setInfo("该文章不存在");
         } else {
+            redisDao.saveArticleInCache(article);
             or.setSuccess(true);
             or.setData(article);
         }

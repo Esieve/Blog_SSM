@@ -26,7 +26,7 @@
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper white">
-            <a href="/manage" class="brand-logo indigo-text darken-3">ACodesigner's Blog Back End</a>
+            <a href="/manage" class="brand-logo indigo-text darken-3">Esieve's Blog Backend</a>
             <a href="#" data-activates="mobile-demo" class="right button-collapse grey-text"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="/manage/article" class="grey-text"><i class="material-icons left">border_color</i>文章</a>

@@ -20,7 +20,7 @@
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper white">
-            <a href="/blog" class="brand-logo indigo-text darken-3">ACodesigner's Blog</a>
+            <a href="/blog" class="brand-logo indigo-text darken-3">Esieve's Blog</a>
             <a href="#" data-activates="mobile-demo" class="right button-collapse grey-text"><i class="material-icons">menu</i></a>
 
             <ul class="right hide-on-med-and-down">
@@ -167,7 +167,7 @@
     </div>
     <div class="footer-copyright indigo darken-4">
         <div class="container">
-            © 2017 ACodesigner
+            © 2017 Esieve
             <a href="https://github.com/codesign-er/Blog/blob/master/LICENSE" target="_blank"
                class="grey-text text-lighten-4 right" href="#!">MIT License</a>
         </div>

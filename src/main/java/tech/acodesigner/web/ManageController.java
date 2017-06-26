@@ -240,7 +240,7 @@ public class ManageController {
         }
         Iterator<FileItem> itr = items.iterator();
         while (itr.hasNext()) {
-            FileItem item = (FileItem) itr.next();
+            FileItem item = itr.next();
             if (item.isFormField()) {
                 System.out.println("error");
             } else if ("userImage".equals(item.getFieldName())) {
@@ -268,6 +268,14 @@ public class ManageController {
             }
         }
     }
+
+    //todo 图片删除操作
+//    @RequestMapping(value = "/image/delete/{userId}", method = RequestMethod.GET)
+//    public String deleteUser(@PathVariable("userId") Integer userId, RedirectAttributes attributes) {
+//        OperationResult result = userService.deleteUser(userId);
+//        attributes.addFlashAttribute("info", result.getInfo());
+//        return "redirect:/manage/user";
+//    }
 
     //用户的管理 超级用户无法修改个人信息
     //todo
