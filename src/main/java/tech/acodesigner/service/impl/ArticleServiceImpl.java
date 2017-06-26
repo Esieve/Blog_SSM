@@ -53,18 +53,19 @@ public class ArticleServiceImpl implements ArticleService {
 
     //增加了redis对文章详情缓存
     public OperationResult<ArticleDto> getArticleById(int articleId) {
+        OperationResult<ArticleDto> or = new OperationResult<ArticleDto>();
+
         ArticleDto article = redisDao.getArticleByIdInCache(articleId);
         if (article == null) {
             article = articleDao.getArticleById(articleId);
-        }
-        OperationResult<ArticleDto> or = new OperationResult<ArticleDto>();
-        if (article == null) {
-            or.setSuccess(false);
-            or.setInfo("该文章不存在");
-        } else {
-            redisDao.saveArticleInCache(article);
-            or.setSuccess(true);
-            or.setData(article);
+            if (article == null) {
+                or.setSuccess(false);
+                or.setInfo("该文章不存在");
+            } else {
+                redisDao.saveArticleInCache(article);
+                or.setSuccess(true);
+                or.setData(article);
+            }
         }
         return or;
     }
