@@ -56,16 +56,20 @@ public class ArticleServiceImpl implements ArticleService {
         OperationResult<ArticleDto> or = new OperationResult<ArticleDto>();
 
         ArticleDto article = redisDao.getArticleByIdInCache(articleId);
+        if (article != null) {
+            or.setSuccess(true);
+            or.setData(article);
+            return or;
+        }
+
+        article = articleDao.getArticleById(articleId);
         if (article == null) {
-            article = articleDao.getArticleById(articleId);
-            if (article == null) {
-                or.setSuccess(false);
-                or.setInfo("该文章不存在");
-            } else {
-                redisDao.saveArticleInCache(article);
-                or.setSuccess(true);
-                or.setData(article);
-            }
+            or.setSuccess(false);
+            or.setInfo("该文章不存在");
+        } else {
+            redisDao.saveArticleInCache(article);
+            or.setSuccess(true);
+            or.setData(article);
         }
         return or;
     }
