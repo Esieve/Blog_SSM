@@ -65,7 +65,7 @@
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid</artifactId>
-        <version>1.1.0</version>
+        <version>1.1.2</version>
     </dependency>
 
     <dependency>
@@ -179,5 +179,15 @@
 
   <build>
       <finalName>mblog</finalName>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>1.8</source>
+                  <target>1.8</target>
+              </configuration>
+          </plugin>
+      </plugins>
   </build>
 </project>

@@ -57,7 +57,7 @@ public class BlogController {
         if (page == null || page == "") {
             page = "1";
         }
-        PageUtil pageUtil = new PageUtil(Integer.parseInt(page), 3);
+        PageUtil pageUtil = new PageUtil(Integer.parseInt(page), 4);
         List<ArticleDto> articles = null;
         String pageCode = null;
         if (search != null && !search.equals("")) {

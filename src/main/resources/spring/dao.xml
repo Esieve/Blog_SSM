@@ -30,6 +30,10 @@
         <property name="maxActive" value="30"/>
         <property name="minIdle" value="10"/>
         <property name="maxWait" value="1000"/>
+
+        <property name="removeAbandoned" value="true"/> <!-- 打开removeAbandoned功能 -->
+        <property name="removeAbandonedTimeout" value="1800"/> <!-- 1800秒，也就是30分钟 -->
+        <property name="logAbandoned" value="true"/> <!-- 关闭abanded连接时输出错误日志 -->
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
