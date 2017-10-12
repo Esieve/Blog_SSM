@@ -47,12 +47,18 @@ public class BlogController {
     @RequestMapping(value = {"blog", "/"}, method = RequestMethod.GET)
     public String showBlogView(HttpServletRequest request, Model model, @RequestParam(value = "page", required = false) String page,
                                @RequestParam(value = "search", required = false) String search) {
+
         List<ArticleLiteDto> recentArticles = articleService.getRecentArticles();
         List<ArticleLiteDto> mostViewedArticles = articleService.getMostViewedArticles();
+        List<Link> links = linkService.getLinks();
         request.getServletContext().setAttribute("recentArticles", recentArticles);
         request.getServletContext().setAttribute("mostViewedArticles", mostViewedArticles);
-        List<Link> links = linkService.getLinks();
         request.getServletContext().setAttribute("links", links);
+
+        //首页用户头像,未登录默认显示ted
+        //todo 未登录显示特殊头像
+        UserDto user = (UserDto) request.getSession().getAttribute("curUser");
+        request.getServletContext().setAttribute("userImage", "/images/user/" + (user == null ? "ted.jpg" : user.getImage()));
 
         if (page == null || page == "") {
             page = "1";

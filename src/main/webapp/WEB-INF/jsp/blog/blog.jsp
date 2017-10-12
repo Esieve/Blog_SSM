@@ -5,35 +5,17 @@
     <%@ include file="../common/head.jsp" %>
 </head>
 <body class="grey lighten-4">
-<%--<!--导航条-->--%>
-<%--<div class="navbar-fixed">--%>
-<%--<nav>--%>
-<%--<div class="nav-wrapper white">--%>
-<%--<a href="/blog" class="brand-logo indigo-text darken-3 center">Esieve's Blog</a>--%>
-<%--<a href="#" data-activates="mobile-demo" class="right button-collapse grey-text"><i class="material-icons">menu</i></a>--%>
-<%----%>
-<%--<ul class="right hide-on-med-and-down">--%>
-<%--<li><a href="/blog" class="grey-text"><i class="material-icons left">home</i>首页</a></li>--%>
-<%--<li><a href="/blog/category" class="grey-text"><i class="material-icons left">view_list</i>分类</a></li>--%>
-<%--<li><a href="/blog/archive" class="grey-text"><i class="material-icons left">folder</i>归档</a></li>--%>
-<%--<li><a href="/blog/message" class="grey-text"><i class="material-icons left">message</i>留言</a>--%>
-<%--</li>--%>
-<%--<li><a href="/blog/about" class="grey-text"><i class="material-icons left">error</i>关于</a></li>--%>
-<%--<li><a href="/login" class="waves-effect waves-green btn orange hoverable"><i--%>
-<%--class="material-icons left">person</i>控制台</a></li>--%>
-<%--</ul>--%>
-<%----%>
-<%--</div>--%>
-<%--</nav>--%>
-<%--</div>--%>
 
 <div class="row">
     <!--侧栏-->
     <div class="col l3">
         <ul id="slide-out" class="side-nav fixed">
             <li style="margin-top: 30px;margin-bottom: 30px">
-                <div class="center container"><a href="/login"><img src="images/user/ted.jpg" alt=""
-                                                                    class="circle responsive-img brand-logo hoverable z-depth-3"></a>
+                <div class="center container">
+                    <a href="/login">
+                        <img src="${userImage}" alt="${userImage}"
+                             class="circle responsive-img brand-logo hoverable z-depth-3">
+                    </a>
                 </div>
             </li>
             <li><h5 class="center-align">Esieve's Blog</h5></li>
@@ -42,7 +24,6 @@
             <li><a href="/blog/archive" class="grey-text"><i class="material-icons left">folder</i>归档</a></li>
             <li><a href="/blog/message" class="grey-text"><i class="material-icons left">message</i>留言</a></li>
             <li><a href="/blog/about" class="grey-text"><i class="material-icons left">error</i>关于</a></li>
-            <%--<li><a href="/login" class="waves-effect waves-green btn orange hoverable"><i class="material-icons left">person</i>控制台</a></li>--%>
         </ul>
         <a href="" data-activates="slide-out" class="button-collapse grey-text"><i
                 class="material-icons medium">menu</i></a>
@@ -50,7 +31,6 @@
 
     <!--页面内容-->
     <div class="col l9 s12 m12">
-        <%--<div class="container">--%>
         <div class="row ">
             <div class="col s7">
                 <%@ include file="../common/info.jsp" %>
@@ -71,6 +51,7 @@
                     </div>
                 </nav>
 
+                <!--访问量-->
                 <div class="card grey hoverable">
                     <div class="card-content white-text">
                         <P class="flow-text">
@@ -143,7 +124,6 @@
                 </div>
             </div>
         </div>
-        <%--</div>--%>
     </div>
 </div>
 

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tech.acodesigner.dto.ArticleDto;
 import tech.acodesigner.dto.CategoryDto;
 import tech.acodesigner.dto.OperationResult;
+import tech.acodesigner.dto.UserDto;
 import tech.acodesigner.entity.Article;
 import tech.acodesigner.entity.Category;
 import tech.acodesigner.entity.Link;
@@ -57,7 +58,12 @@ public class ManageController {
     private AboutService aboutService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String showManageView(Model model) {
+    public String showManageView(HttpServletRequest request, Model model) {
+        //首页用户头像,未登录默认显示ted
+        //todo 未登录显示特殊头像
+        UserDto user = (UserDto) request.getSession().getAttribute("curUser");
+        request.getServletContext().setAttribute("userImage", "/images/user/" + (user == null ? "ted.jpg" : user.getImage()));
+
         model.addAttribute("mainPage", "manageView.jsp");
         return "manage/manage";
     }
