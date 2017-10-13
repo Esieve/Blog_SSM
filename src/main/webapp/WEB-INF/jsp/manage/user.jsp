@@ -29,7 +29,7 @@
                 <tbody>
                 <c:forEach var="user" items="${users}">
                     <tr class="hoverable">
-                        <td><img src="../images/user/${user.image}" height="50px" class="circle"></td>
+                        <td><img src="/images/user/${user.image}" height="50px" class="circle"></td>
                         <td>${user.username}</td>
                         <td>
                             <a href="/manage/user/modify/${user.userId}"

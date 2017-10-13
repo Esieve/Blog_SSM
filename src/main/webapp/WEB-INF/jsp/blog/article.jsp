@@ -12,7 +12,7 @@
         <div class="col s12">
             <div class="card small hoverable">
                 <div class="card-image">
-                    <img src="images/article/${article.image}">
+                    <img src="/images/article/${article.image}">
                     <span class="card-title">${article.title}</span>
                 </div>
                 <div class="card-content">

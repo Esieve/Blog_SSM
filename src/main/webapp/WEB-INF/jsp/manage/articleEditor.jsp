@@ -59,7 +59,7 @@
                         <option value="" disabled selected>图片</option>
                         <c:forEach var="image" items="${images}">
                             <option value="${image}"
-                                    data-icon="../../images/article/${image}" ${article.image==image?'selected':'' }>${image}</option>
+                                    data-icon="/images/article/${image}" ${article.image==image?'selected':'' }>${image}</option>
                         </c:forEach>
                     </select>
                 </div>

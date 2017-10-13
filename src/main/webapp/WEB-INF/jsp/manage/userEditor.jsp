@@ -63,7 +63,7 @@
                     <select id="image" name="image" class="icons">
                         <option value="" disabled selected>头像</option>
                         <c:forEach var="image" items="${images}">
-                            <option value="${image}" data-icon="../../images/user/${image}" class="circle"
+                            <option value="${image}" data-icon="/images/user/${image}" class="circle"
                                     }>${image}</option>
                         </c:forEach>
                     </select>
