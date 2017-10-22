@@ -19,9 +19,7 @@ import tech.acodesigner.service.LinkService;
 import tech.acodesigner.util.PageUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Created by 张秦遥 on 2017/4/6/0006.
@@ -161,7 +159,28 @@ public class BlogController {
     @RequestMapping(value = "/blog/archive", method = RequestMethod.GET)
     public String showArchiveView(Model model) {
         List<ArticleDto> articles = articleService.getArticles();
-        model.addAttribute("articles", articles);
+
+        Map<String, List<ArticleDto>> archive = new TreeMap<>(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o2.compareTo(o1);
+            }
+        });
+
+        for (ArticleDto article : articles) {
+            Date articleDate = article.getPubDate();
+            String dateStr = String.valueOf(1900 + articleDate.getYear()) + "-" + String.valueOf(1 + articleDate.getMonth());
+
+            if (archive.get(dateStr) == null) {
+                List<ArticleDto> articleListByDate = new ArrayList<>();
+                articleListByDate.add(article);
+                archive.put(dateStr, articleListByDate);
+            } else {
+                archive.get(dateStr).add(article);
+            }
+        }
+
+        model.addAttribute("archive", archive);
         model.addAttribute("mainPage", "archive.jsp");
         return "blog/blog";
     }
